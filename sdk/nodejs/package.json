@@ -1,6 +1,9 @@
 {
     "name": "@systemfsoftware/stripe",
     "version": "1.0.0-alpha.0+dev",
+    "publishConfig": {
+        "access": "public"
+    },
     "description": "A Pulumi package for creating and managing stripe cloud resources.",
     "keywords": [
         "stripe",
