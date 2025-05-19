@@ -1,4 +1,4 @@
-module github.com/pulumi/pulumi-xyz/examples
+module github.com/systemfsoftware/pulumi-stripe/examples
 
 go 1.22
 
