@@ -120,7 +120,7 @@ jobs:
       - name: Setup tools
         uses: ./.github/actions/setup-tools
         with:
-          tools: pulumictl, pulumicli, dotnet, go, nodejs, python
+          tools: pulumictl, pulumicli, nodejs
           cache-go: false
       - name: Publish SDKs
         if: inputs.skipJavaSdk == false
