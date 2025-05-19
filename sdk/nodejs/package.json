@@ -1,13 +1,13 @@
 {
-    "name": "@pulumi/xyz",
+    "name": "@systemfsoftware/stripe",
     "version": "1.0.0-alpha.0+dev",
-    "description": "A Pulumi package for creating and managing xyz cloud resources.",
+    "description": "A Pulumi package for creating and managing stripe cloud resources.",
     "keywords": [
-        "xyz",
+        "stripe",
         "category/cloud"
     ],
     "homepage": "https://www.pulumi.com",
-    "repository": "https://github.com/pulumi/pulumi-xyz",
+    "repository": "https://github.com/systemfsoftware/pulumi-stripe",
     "license": "Apache-2.0",
     "scripts": {
         "build": "tsc"
@@ -21,7 +21,8 @@
     },
     "pulumi": {
         "resource": true,
-        "name": "xyz",
+        "name": "stripe",
         "version": "1.0.0-alpha.0+dev"
-    }
+    },
+    "packageManager": "yarn@1.22.22+sha1.ac34549e6aa8e7ead463a7407e1c7390f61a6610"
 }

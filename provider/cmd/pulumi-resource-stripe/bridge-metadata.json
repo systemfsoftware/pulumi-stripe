@@ -1,0 +1,212 @@
+{
+    "auto-aliasing": {
+        "resources": {
+            "stripe_card": {
+                "current": "stripe:index/card:Card",
+                "majorVersion": 1,
+                "fields": {
+                    "available_payout_methods": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "stripe_coupon": {
+                "current": "stripe:index/coupon:Coupon",
+                "majorVersion": 1,
+                "fields": {
+                    "applies_to": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "stripe_customer": {
+                "current": "stripe:index/customer:Customer",
+                "majorVersion": 1,
+                "fields": {
+                    "preferred_locales": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "stripe_file": {
+                "current": "stripe:index/file:File",
+                "majorVersion": 1,
+                "fields": {
+                    "link_data": {
+                        "maxItemsOne": true
+                    },
+                    "links": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "stripe_portal_configuration": {
+                "current": "stripe:index/portalConfiguration:PortalConfiguration",
+                "majorVersion": 1,
+                "fields": {
+                    "business_profile": {
+                        "maxItemsOne": true
+                    },
+                    "features": {
+                        "maxItemsOne": true,
+                        "elem": {
+                            "fields": {
+                                "customer_update": {
+                                    "maxItemsOne": true,
+                                    "elem": {
+                                        "fields": {
+                                            "allowed_updates": {
+                                                "maxItemsOne": false
+                                            }
+                                        }
+                                    }
+                                },
+                                "invoice_history": {
+                                    "maxItemsOne": true
+                                },
+                                "payment_method_update": {
+                                    "maxItemsOne": true
+                                },
+                                "subscription_cancel": {
+                                    "maxItemsOne": true,
+                                    "elem": {
+                                        "fields": {
+                                            "cancellation_reason": {
+                                                "maxItemsOne": true,
+                                                "elem": {
+                                                    "fields": {
+                                                        "options": {
+                                                            "maxItemsOne": false
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "subscription_pause": {
+                                    "maxItemsOne": false
+                                },
+                                "subscription_update": {
+                                    "maxItemsOne": false,
+                                    "elem": {
+                                        "fields": {
+                                            "default_allowed_updates": {
+                                                "maxItemsOne": false
+                                            },
+                                            "products": {
+                                                "maxItemsOne": false,
+                                                "elem": {
+                                                    "fields": {
+                                                        "prices": {
+                                                            "maxItemsOne": false
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "login_page": {
+                        "maxItemsOne": true
+                    }
+                }
+            },
+            "stripe_price": {
+                "current": "stripe:index/price:Price",
+                "majorVersion": 1,
+                "fields": {
+                    "currency_options": {
+                        "maxItemsOne": false,
+                        "elem": {
+                            "fields": {
+                                "custom_unit_amount": {
+                                    "maxItemsOne": true
+                                },
+                                "tiers": {
+                                    "maxItemsOne": false
+                                }
+                            }
+                        }
+                    },
+                    "recurring": {
+                        "maxItemsOne": true
+                    },
+                    "tiers": {
+                        "maxItemsOne": false
+                    },
+                    "transform_quantity": {
+                        "maxItemsOne": true
+                    }
+                }
+            },
+            "stripe_product": {
+                "current": "stripe:index/product:Product",
+                "majorVersion": 1,
+                "fields": {
+                    "features": {
+                        "maxItemsOne": false
+                    },
+                    "images": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "stripe_promotion_code": {
+                "current": "stripe:index/promotionCode:PromotionCode",
+                "majorVersion": 1,
+                "fields": {
+                    "restrictions": {
+                        "maxItemsOne": true
+                    }
+                }
+            },
+            "stripe_shipping_rate": {
+                "current": "stripe:index/shippingRate:ShippingRate",
+                "majorVersion": 1,
+                "fields": {
+                    "delivery_estimate": {
+                        "maxItemsOne": false,
+                        "elem": {
+                            "fields": {
+                                "maximum": {
+                                    "maxItemsOne": true
+                                },
+                                "minimum": {
+                                    "maxItemsOne": true
+                                }
+                            }
+                        }
+                    },
+                    "fixed_amount": {
+                        "maxItemsOne": true,
+                        "elem": {
+                            "fields": {
+                                "currency_option": {
+                                    "maxItemsOne": false
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "stripe_tax_rate": {
+                "current": "stripe:index/taxRate:TaxRate",
+                "majorVersion": 1
+            },
+            "stripe_webhook_endpoint": {
+                "current": "stripe:index/webhookEndpoint:WebhookEndpoint",
+                "majorVersion": 1,
+                "fields": {
+                    "enabled_events": {
+                        "maxItemsOne": false
+                    }
+                }
+            }
+        }
+    },
+    "auto-settings": {}
+}

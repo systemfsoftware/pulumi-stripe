@@ -6,3 +6,391 @@ import * as inputs from "../types/input";
 import * as outputs from "../types/output";
 import * as enums from "../types/enums";
 
+export interface FileLink {
+    /**
+     * Time at which the object was created. Measured in seconds since the Unix epoch.
+     */
+    created?: pulumi.Input<number>;
+    /**
+     * Returns if the link is already expired.
+     */
+    expired?: pulumi.Input<boolean>;
+    /**
+     * Time that the link expires
+     */
+    expiresAt?: pulumi.Input<number>;
+    /**
+     * Unique identifier for the object.
+     */
+    id?: pulumi.Input<string>;
+    /**
+     * Has the value true if the object exists in live mode or the value false if the object exists in test mode.
+     */
+    livemode?: pulumi.Input<boolean>;
+    /**
+     * Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
+     */
+    metadata?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    /**
+     * String representing the object’s type. Objects of the same type share the same value.
+     */
+    object?: pulumi.Input<string>;
+    /**
+     * The publicly accessible URL to download the file.
+     */
+    url?: pulumi.Input<string>;
+}
+
+export interface FileLinkData {
+    /**
+     * Set this to true to create a file link for the newly created file. Creating a link is only possible when the file’s purpose is one of the following: business_icon, business_logo, customer_signature, dispute_evidence, pci_document, tax_document_user_upload, or terminal_reader_splashscreen.
+     */
+    create: pulumi.Input<boolean>;
+    /**
+     * The link isn’t available after this future timestamp.
+     */
+    expiresAt?: pulumi.Input<number>;
+    /**
+     * Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
+     */
+    metadata?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+}
+
+export interface PortalConfigurationBusinessProfile {
+    /**
+     * The messaging shown to customers in the portal.
+     */
+    headline?: pulumi.Input<string>;
+    /**
+     * A link to the business's publicly available privacy policy.
+     */
+    privacyPolicyUrl?: pulumi.Input<string>;
+    /**
+     * A link to the business's publicly available terms of service.
+     */
+    termsOfServiceUrl?: pulumi.Input<string>;
+}
+
+export interface PortalConfigurationFeatures {
+    /**
+     * Information about updating the customer details in the portal.
+     */
+    customerUpdate?: pulumi.Input<inputs.PortalConfigurationFeaturesCustomerUpdate>;
+    /**
+     * Information about showing the billing history in the portal.
+     */
+    invoiceHistory?: pulumi.Input<inputs.PortalConfigurationFeaturesInvoiceHistory>;
+    /**
+     * Information about updating payment methods in the portal.
+     */
+    paymentMethodUpdate?: pulumi.Input<inputs.PortalConfigurationFeaturesPaymentMethodUpdate>;
+    /**
+     * Information about canceling subscriptions in the portal.
+     */
+    subscriptionCancel?: pulumi.Input<inputs.PortalConfigurationFeaturesSubscriptionCancel>;
+    /**
+     * Information about pausing subscriptions in the portal.
+     */
+    subscriptionPauses?: pulumi.Input<pulumi.Input<inputs.PortalConfigurationFeaturesSubscriptionPause>[]>;
+    /**
+     * Information about updating subscriptions in the portal.
+     */
+    subscriptionUpdates?: pulumi.Input<pulumi.Input<inputs.PortalConfigurationFeaturesSubscriptionUpdate>[]>;
+}
+
+export interface PortalConfigurationFeaturesCustomerUpdate {
+    /**
+     * The types of customer updates that are supported. When empty, customers are not updatable.
+     */
+    allowedUpdates?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Whether the feature is enabled.
+     */
+    enabled: pulumi.Input<boolean>;
+}
+
+export interface PortalConfigurationFeaturesInvoiceHistory {
+    /**
+     * Whether the feature is enabled.
+     */
+    enabled: pulumi.Input<boolean>;
+}
+
+export interface PortalConfigurationFeaturesPaymentMethodUpdate {
+    /**
+     * Whether the feature is enabled.
+     */
+    enabled: pulumi.Input<boolean>;
+}
+
+export interface PortalConfigurationFeaturesSubscriptionCancel {
+    /**
+     * Whether the cancellation reasons will be collected in the portal and which options are exposed to the customer
+     */
+    cancellationReason?: pulumi.Input<inputs.PortalConfigurationFeaturesSubscriptionCancelCancellationReason>;
+    /**
+     * Whether the feature is enabled.
+     */
+    enabled: pulumi.Input<boolean>;
+    /**
+     * Whether to cancel subscriptions immediately or at the end of the billing period.
+     */
+    mode?: pulumi.Input<string>;
+    /**
+     * Whether to create prorations when canceling subscriptions.
+     */
+    prorationBehavior?: pulumi.Input<string>;
+}
+
+export interface PortalConfigurationFeaturesSubscriptionCancelCancellationReason {
+    /**
+     * Whether the feature is enabled.
+     */
+    enabled: pulumi.Input<boolean>;
+    /**
+     * Which cancellation reasons will be given as options to the customer.
+     */
+    options: pulumi.Input<pulumi.Input<string>[]>;
+}
+
+export interface PortalConfigurationFeaturesSubscriptionPause {
+    /**
+     * Whether the feature is enabled.
+     */
+    enabled?: pulumi.Input<boolean>;
+}
+
+export interface PortalConfigurationFeaturesSubscriptionUpdate {
+    /**
+     * The types of subscription updates that are supported. When empty, subscriptions are not updateable.
+     */
+    defaultAllowedUpdates: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Whether the feature is enabled.
+     */
+    enabled: pulumi.Input<boolean>;
+    /**
+     * The list of products that support subscription updates.
+     */
+    products: pulumi.Input<pulumi.Input<inputs.PortalConfigurationFeaturesSubscriptionUpdateProduct>[]>;
+    /**
+     * Determines how to handle prorations resulting from subscription updates
+     */
+    prorationBehavior?: pulumi.Input<string>;
+}
+
+export interface PortalConfigurationFeaturesSubscriptionUpdateProduct {
+    /**
+     * The list of price IDs for the product that a subscription can be updated to.
+     */
+    prices: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * The product id.
+     */
+    product: pulumi.Input<string>;
+}
+
+export interface PortalConfigurationLoginPage {
+    /**
+     * Set to true to generate a shareable URL login_page.url that will take your customers to a hosted login page for the customer portal.
+     */
+    enabled?: pulumi.Input<boolean>;
+    /**
+     * A shareable URL to the hosted portal login page. Your customers will be able to log in with their email and receive a link to their customer portal.
+     */
+    url?: pulumi.Input<string>;
+}
+
+export interface PriceCurrencyOption {
+    /**
+     * Each currency must be a three-letter ISO currency code and a supported currency
+     */
+    currency: pulumi.Input<string>;
+    /**
+     * When set, provides configuration for the amount to be adjusted by the customer during Checkout Sessions and Payment Links
+     */
+    customUnitAmount?: pulumi.Input<inputs.PriceCurrencyOptionCustomUnitAmount>;
+    /**
+     * Only required if a default tax behavior was not provided in the Stripe Tax settings. Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of inclusive, exclusive, or unspecified. Once specified as either inclusive or exclusive, it cannot be changed.
+     */
+    taxBehavior?: pulumi.Input<string>;
+    /**
+     * Each element represents a pricing tier. This parameter requires billingScheme to be set to tiered. See also the documentation for billing_scheme.
+     */
+    tiers?: pulumi.Input<pulumi.Input<inputs.PriceCurrencyOptionTier>[]>;
+    /**
+     * A positive integer in cents (or -1 for a free price) representing how much to charge.
+     */
+    unitAmount?: pulumi.Input<number>;
+    /**
+     * Same as unit_amount, but accepts a decimal value in cents with at most 12 decimal places. Only one of unitAmount and unitAmountDecimal can be set.
+     */
+    unitAmountDecimal?: pulumi.Input<number>;
+}
+
+export interface PriceCurrencyOptionCustomUnitAmount {
+    /**
+     * Pass in true to enable custom_unit_amount, otherwise omit custom_unit_amount
+     */
+    enabled: pulumi.Input<boolean>;
+    /**
+     * The maximum unit amount the customer can specify for this item.
+     */
+    maximum?: pulumi.Input<number>;
+    /**
+     * The minimum unit amount the customer can specify for this item. Must be at least the minimum charge amount.
+     */
+    minimum?: pulumi.Input<number>;
+    /**
+     * The starting unit amount which can be updated by the customer.
+     */
+    preset?: pulumi.Input<number>;
+}
+
+export interface PriceCurrencyOptionTier {
+    /**
+     * The flat billing amount for an entire tier, regardless of the number of units in the tier.
+     */
+    flatAmount?: pulumi.Input<number>;
+    /**
+     * Same as flat_amount, but accepts a decimal value representing an integer in the minor units of the currency. Only one of flatAmount and flatAmountDecimal can be set.
+     */
+    flatAmountDecimal?: pulumi.Input<number>;
+    /**
+     * The per unit billing amount for each individual unit for which this tier applies.
+     */
+    unitAmount?: pulumi.Input<number>;
+    /**
+     * Same as unit_amount, but accepts a decimal value in cents with at most 12 decimal places. Only one of unitAmount and unitAmountDecimal can be set.
+     */
+    unitAmountDecimal?: pulumi.Input<number>;
+    /**
+     * Specifies the upper bound of this tier. The lower bound of a tier is the upper bound of the previous tier adding one. Use -1 to define a fallback tier.
+     */
+    upTo?: pulumi.Input<number>;
+}
+
+export interface PriceRecurring {
+    /**
+     * Specifies a usage aggregation strategy for prices of usage_type=metered. Allowed values are sum for summing up all usage during a period, lastDuringPeriod for using the last usage record reported within a period, lastEver for using the last usage record ever (across period bounds) or max which uses the usage record with the maximum reported usage during a period.
+     */
+    aggregateUsage?: pulumi.Input<string>;
+    /**
+     * Specifies billing frequency. Either day, week, month or year.
+     */
+    interval: pulumi.Input<string>;
+    /**
+     * The number of intervals between subscription billings. For example, interval=month and interval_count=3 bills every 3 months. Maximum of one year interval allowed (1 year, 12 months, or 52 weeks).
+     */
+    intervalCount?: pulumi.Input<number>;
+    /**
+     * Configures how the quantity per period should be determined. Can be either metered or licensed. licensed automatically bills the quantity set when adding it to a subscription. metered aggregates the total usage based on usage records. Defaults to licensed.
+     */
+    usageType?: pulumi.Input<string>;
+}
+
+export interface PriceTier {
+    /**
+     * The flat billing amount for an entire tier, regardless of the number of units in the tier.
+     */
+    flatAmount?: pulumi.Input<number>;
+    /**
+     * Same as flat_amount, but accepts a decimal value representing an integer in the minor units of the currency. Only one of flatAmount and flatAmountDecimal can be set.
+     */
+    flatAmountDecimal?: pulumi.Input<number>;
+    /**
+     * The per unit billing amount for each individual unit for which this tier applies.
+     */
+    unitAmount?: pulumi.Input<number>;
+    /**
+     * Same as unit_amount, but accepts a decimal value in cents with at most 12 decimal places. Only one of unitAmount and unitAmountDecimal can be set.
+     */
+    unitAmountDecimal?: pulumi.Input<number>;
+    /**
+     * Specifies the upper bound of this tier. The lower bound of a tier is the upper bound of the previous tier adding one. Use -1 to define a fallback tier.
+     */
+    upTo?: pulumi.Input<number>;
+}
+
+export interface PriceTransformQuantity {
+    /**
+     * Divide usage by this number.
+     */
+    divideBy: pulumi.Input<number>;
+    /**
+     * After division, either round the result up or down
+     */
+    round: pulumi.Input<string>;
+}
+
+export interface PromotionCodeRestrictions {
+    /**
+     * A Boolean indicating if the Promotion Code should only be redeemed for Customers without any successful payments or invoices
+     */
+    firstTimeTransaction: pulumi.Input<boolean>;
+    /**
+     * Minimum amount required to redeem this Promotion Code into a Coupon (e.g., a purchase must be $100 or more to work).
+     */
+    minimumAmount: pulumi.Input<number>;
+    /**
+     * Three-letter ISO code for minimum_amount
+     */
+    minimumAmountCurrency: pulumi.Input<string>;
+}
+
+export interface ShippingRateDeliveryEstimate {
+    maximum?: pulumi.Input<inputs.ShippingRateDeliveryEstimateMaximum>;
+    minimum?: pulumi.Input<inputs.ShippingRateDeliveryEstimateMinimum>;
+}
+
+export interface ShippingRateDeliveryEstimateMaximum {
+    /**
+     * The upper bound of the estimated range. If empty, represents no lower bound.
+     */
+    unit: pulumi.Input<string>;
+    /**
+     * Must be greater than 0.
+     */
+    value: pulumi.Input<number>;
+}
+
+export interface ShippingRateDeliveryEstimateMinimum {
+    /**
+     * The lower bound of the estimated range. If empty, represents no lower bound.
+     */
+    unit: pulumi.Input<string>;
+    /**
+     * Must be greater than 0.
+     */
+    value: pulumi.Input<number>;
+}
+
+export interface ShippingRateFixedAmount {
+    /**
+     * A non-negative integer in cents representing how much to charge.
+     */
+    amount: pulumi.Input<number>;
+    /**
+     * Three-letter ISO currency code, in lowercase. Must be a supported currency.
+     */
+    currency: pulumi.Input<string>;
+    /**
+     * Shipping rates defined in each available currency option. Each key must be a three-letter ISO currency code and a supported currency. For example, to get your shipping rate in eur, fetch the value of the eur key in currency_options. This field is not included by default. To include it in the response, expand the currencyOptions field.
+     */
+    currencyOptions?: pulumi.Input<pulumi.Input<inputs.ShippingRateFixedAmountCurrencyOption>[]>;
+}
+
+export interface ShippingRateFixedAmountCurrencyOption {
+    /**
+     * A non-negative integer in cents representing how much to charge.
+     */
+    amount: pulumi.Input<number>;
+    /**
+     * Three-letter ISO currency code, in lowercase. Must be a supported currency.
+     */
+    currency: pulumi.Input<string>;
+    /**
+     * Specifies whether the rate is considered inclusive of taxes or exclusive of taxes. One of inclusive, exclusive, or unspecified.
+     */
+    taxBehavior?: pulumi.Input<string>;
+}
