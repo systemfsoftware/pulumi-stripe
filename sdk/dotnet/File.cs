@@ -9,14 +9,6 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Stripe
 {
-    /// <summary>
-    /// This object represents files hosted on Stripe's servers - [Stripe API file documentation](https://stripe.com/docs/api/files).
-    /// You can upload files with the create file request (for example, when uploading dispute evidence).
-    /// 
-    /// Stripe File upload [guide](https://stripe.com/docs/file-upload#uploading-a-file)
-    /// 
-    /// &gt; Update or removal of the file isn't supported through the Stripe SDK.
-    /// </summary>
     [StripeResourceType("stripe:index/file:File")]
     public partial class File : global::Pulumi.CustomResource
     {
@@ -27,19 +19,19 @@ namespace Pulumi.Stripe
         public Output<string> Base64content { get; private set; } = null!;
 
         /// <summary>
-        /// String. Time at which the object was created. Measured in seconds since the Unix epoch.
+        /// Time at which the object was created. Measured in seconds since the Unix epoch.
         /// </summary>
         [Output("created")]
         public Output<int> Created { get; private set; } = null!;
 
         /// <summary>
-        /// Int. Time that the link expires.
+        /// The file expires and isn’t available at this time in epoch seconds.
         /// </summary>
         [Output("expiresAt")]
         public Output<int> ExpiresAt { get; private set; } = null!;
 
         /// <summary>
-        /// String. The suitable name for saving the file to a filesystem.
+        /// The suitable name for saving the file to a filesystem.
         /// </summary>
         [Output("filename")]
         public Output<string> Filename { get; private set; } = null!;
@@ -50,42 +42,35 @@ namespace Pulumi.Stripe
         [Output("linkData")]
         public Output<Outputs.FileLinkData?> LinkData { get; private set; } = null!;
 
-        /// <summary>
-        /// List(Resource). A list of [file links](https://stripe.com/docs/api/files/object#file_links) that point at this file.
-        /// Please see details of links.
-        /// </summary>
         [Output("links")]
         public Output<ImmutableArray<Outputs.FileLink>> Links { get; private set; } = null!;
 
         /// <summary>
-        /// String. String representing the object’s type. Objects of the same type share the same value.
+        /// String representing the object’s type. Objects of the same type share the same value.
         /// </summary>
         [Output("object")]
         public Output<string> Object { get; private set; } = null!;
 
         /// <summary>
-        /// String. The purpose of the uploaded file. One of these values are accepted: `account_requirement`,
-        /// `additional_verification`, `business_icon`, `business_logo`, `customer_signature`, `dispute_evidence`,
-        /// `document_provider_identity_document`, `finance_report_run`, `identity_document`, `identity_document_downloadable`,
-        /// `pci_document`, `selfie`, `sigma_scheduled_query`, `tax_document_user_upload`, `terminal_reader_splashscreen`
+        /// The purpose of the uploaded file.
         /// </summary>
         [Output("purpose")]
         public Output<string> Purpose { get; private set; } = null!;
 
         /// <summary>
-        /// Int. The size of the file object in bytes.
+        /// The size of the file object in bytes.
         /// </summary>
         [Output("size")]
         public Output<int> Size { get; private set; } = null!;
 
         /// <summary>
-        /// String. The returned file type (for example, `csv`, `pdf`, `jpg`, or `png`).
+        /// The returned file type (for example, csv, pdf, jpg, or png).
         /// </summary>
         [Output("type")]
         public Output<string> Type { get; private set; } = null!;
 
         /// <summary>
-        /// String. The publicly accessible URL to download the file.
+        /// Use your live secret API key to download the file from this URL.
         /// </summary>
         [Output("url")]
         public Output<string> Url { get; private set; } = null!;
@@ -143,7 +128,7 @@ namespace Pulumi.Stripe
         public Input<string> Base64content { get; set; } = null!;
 
         /// <summary>
-        /// String. The suitable name for saving the file to a filesystem.
+        /// The suitable name for saving the file to a filesystem.
         /// </summary>
         [Input("filename", required: true)]
         public Input<string> Filename { get; set; } = null!;
@@ -155,10 +140,7 @@ namespace Pulumi.Stripe
         public Input<Inputs.FileLinkDataArgs>? LinkData { get; set; }
 
         /// <summary>
-        /// String. The purpose of the uploaded file. One of these values are accepted: `account_requirement`,
-        /// `additional_verification`, `business_icon`, `business_logo`, `customer_signature`, `dispute_evidence`,
-        /// `document_provider_identity_document`, `finance_report_run`, `identity_document`, `identity_document_downloadable`,
-        /// `pci_document`, `selfie`, `sigma_scheduled_query`, `tax_document_user_upload`, `terminal_reader_splashscreen`
+        /// The purpose of the uploaded file.
         /// </summary>
         [Input("purpose", required: true)]
         public Input<string> Purpose { get; set; } = null!;
@@ -178,19 +160,19 @@ namespace Pulumi.Stripe
         public Input<string>? Base64content { get; set; }
 
         /// <summary>
-        /// String. Time at which the object was created. Measured in seconds since the Unix epoch.
+        /// Time at which the object was created. Measured in seconds since the Unix epoch.
         /// </summary>
         [Input("created")]
         public Input<int>? Created { get; set; }
 
         /// <summary>
-        /// Int. Time that the link expires.
+        /// The file expires and isn’t available at this time in epoch seconds.
         /// </summary>
         [Input("expiresAt")]
         public Input<int>? ExpiresAt { get; set; }
 
         /// <summary>
-        /// String. The suitable name for saving the file to a filesystem.
+        /// The suitable name for saving the file to a filesystem.
         /// </summary>
         [Input("filename")]
         public Input<string>? Filename { get; set; }
@@ -203,11 +185,6 @@ namespace Pulumi.Stripe
 
         [Input("links")]
         private InputList<Inputs.FileLinkGetArgs>? _links;
-
-        /// <summary>
-        /// List(Resource). A list of [file links](https://stripe.com/docs/api/files/object#file_links) that point at this file.
-        /// Please see details of links.
-        /// </summary>
         public InputList<Inputs.FileLinkGetArgs> Links
         {
             get => _links ?? (_links = new InputList<Inputs.FileLinkGetArgs>());
@@ -215,34 +192,31 @@ namespace Pulumi.Stripe
         }
 
         /// <summary>
-        /// String. String representing the object’s type. Objects of the same type share the same value.
+        /// String representing the object’s type. Objects of the same type share the same value.
         /// </summary>
         [Input("object")]
         public Input<string>? Object { get; set; }
 
         /// <summary>
-        /// String. The purpose of the uploaded file. One of these values are accepted: `account_requirement`,
-        /// `additional_verification`, `business_icon`, `business_logo`, `customer_signature`, `dispute_evidence`,
-        /// `document_provider_identity_document`, `finance_report_run`, `identity_document`, `identity_document_downloadable`,
-        /// `pci_document`, `selfie`, `sigma_scheduled_query`, `tax_document_user_upload`, `terminal_reader_splashscreen`
+        /// The purpose of the uploaded file.
         /// </summary>
         [Input("purpose")]
         public Input<string>? Purpose { get; set; }
 
         /// <summary>
-        /// Int. The size of the file object in bytes.
+        /// The size of the file object in bytes.
         /// </summary>
         [Input("size")]
         public Input<int>? Size { get; set; }
 
         /// <summary>
-        /// String. The returned file type (for example, `csv`, `pdf`, `jpg`, or `png`).
+        /// The returned file type (for example, csv, pdf, jpg, or png).
         /// </summary>
         [Input("type")]
         public Input<string>? Type { get; set; }
 
         /// <summary>
-        /// String. The publicly accessible URL to download the file.
+        /// Use your live secret API key to download the file from this URL.
         /// </summary>
         [Input("url")]
         public Input<string>? Url { get; set; }

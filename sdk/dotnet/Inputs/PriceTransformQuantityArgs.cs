@@ -13,13 +13,13 @@ namespace Pulumi.Stripe.Inputs
     public sealed class PriceTransformQuantityArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Int. Divide usage by this number.
+        /// Divide usage by this number.
         /// </summary>
         [Input("divideBy", required: true)]
         public Input<int> DivideBy { get; set; } = null!;
 
         /// <summary>
-        /// String. After division, either round the result `up` or `down`.
+        /// After division, either round the result up or down
         /// </summary>
         [Input("round", required: true)]
         public Input<string> Round { get; set; } = null!;

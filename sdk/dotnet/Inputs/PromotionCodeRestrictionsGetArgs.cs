@@ -13,22 +13,22 @@ namespace Pulumi.Stripe.Inputs
     public sealed class PromotionCodeRestrictionsGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Bool. A Boolean indicating if the Promotion Code should only be redeemed for Customers without any successful payments or invoices.
+        /// A Boolean indicating if the Promotion Code should only be redeemed for Customers without any successful payments or invoices
         /// </summary>
         [Input("firstTimeTransaction", required: true)]
         public Input<bool> FirstTimeTransaction { get; set; } = null!;
 
         /// <summary>
-        /// Int. Minimum amount required to redeem this Promotion Code into a Coupon (e.g., a purchase must be $100 or more to work).
+        /// Minimum amount required to redeem this Promotion Code into a Coupon (e.g., a purchase must be $100 or more to work).
         /// </summary>
-        [Input("minimumAmount", required: true)]
-        public Input<int> MinimumAmount { get; set; } = null!;
+        [Input("minimumAmount")]
+        public Input<int>? MinimumAmount { get; set; }
 
         /// <summary>
-        /// String. Three-letter ISO code for `minimum_amount`.
+        /// Three-letter ISO code for minimum_amount
         /// </summary>
-        [Input("minimumAmountCurrency", required: true)]
-        public Input<string> MinimumAmountCurrency { get; set; } = null!;
+        [Input("minimumAmountCurrency")]
+        public Input<string>? MinimumAmountCurrency { get; set; }
 
         public PromotionCodeRestrictionsGetArgs()
         {

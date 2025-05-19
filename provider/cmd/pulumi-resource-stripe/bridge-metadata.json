@@ -28,6 +28,10 @@
                     }
                 }
             },
+            "stripe_entitlements_feature": {
+                "current": "stripe:index/entitlementsFeature:EntitlementsFeature",
+                "majorVersion": 1
+            },
             "stripe_file": {
                 "current": "stripe:index/file:File",
                 "majorVersion": 1,
@@ -37,6 +41,21 @@
                     },
                     "links": {
                         "maxItemsOne": false
+                    }
+                }
+            },
+            "stripe_meter": {
+                "current": "stripe:index/meter:Meter",
+                "majorVersion": 1,
+                "fields": {
+                    "customer_mapping": {
+                        "maxItemsOne": true
+                    },
+                    "default_aggregation": {
+                        "maxItemsOne": true
+                    },
+                    "value_settings": {
+                        "maxItemsOne": true
                     }
                 }
             },
@@ -84,9 +103,6 @@
                                         }
                                     }
                                 },
-                                "subscription_pause": {
-                                    "maxItemsOne": false
-                                },
                                 "subscription_update": {
                                     "maxItemsOne": false,
                                     "elem": {
@@ -132,6 +148,9 @@
                             }
                         }
                     },
+                    "custom_unit_amount": {
+                        "maxItemsOne": true
+                    },
                     "recurring": {
                         "maxItemsOne": true
                     },
@@ -147,13 +166,17 @@
                 "current": "stripe:index/product:Product",
                 "majorVersion": 1,
                 "fields": {
-                    "features": {
+                    "images": {
                         "maxItemsOne": false
                     },
-                    "images": {
+                    "marketing_features": {
                         "maxItemsOne": false
                     }
                 }
+            },
+            "stripe_product_feature": {
+                "current": "stripe:index/productFeature:ProductFeature",
+                "majorVersion": 1
             },
             "stripe_promotion_code": {
                 "current": "stripe:index/promotionCode:PromotionCode",

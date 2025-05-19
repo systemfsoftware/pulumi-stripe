@@ -14,11 +14,11 @@ namespace Pulumi.Stripe.Outputs
     public sealed class PortalConfigurationFeaturesSubscriptionUpdateProduct
     {
         /// <summary>
-        /// List(String). The list of price IDs for the product that a subscription can be updated to.
+        /// The list of price IDs for the product that a subscription can be updated to.
         /// </summary>
         public readonly ImmutableArray<string> Prices;
         /// <summary>
-        /// String. The product id.
+        /// The product id.
         /// </summary>
         public readonly string Product;
 

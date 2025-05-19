@@ -14,11 +14,11 @@ namespace Pulumi.Stripe.Outputs
     public sealed class PriceTransformQuantity
     {
         /// <summary>
-        /// Int. Divide usage by this number.
+        /// Divide usage by this number.
         /// </summary>
         public readonly int DivideBy;
         /// <summary>
-        /// String. After division, either round the result `up` or `down`.
+        /// After division, either round the result up or down
         /// </summary>
         public readonly string Round;
 

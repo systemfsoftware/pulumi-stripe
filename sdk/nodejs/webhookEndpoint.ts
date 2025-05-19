@@ -38,6 +38,10 @@ export class WebhookEndpoint extends pulumi.CustomResource {
      */
     public readonly apiVersion!: pulumi.Output<string | undefined>;
     /**
+     * The ID of the associated Connect application.
+     */
+    public /*out*/ readonly application!: pulumi.Output<string>;
+    /**
      * Whether this endpoint should receive events from connected accounts (true), or from your account (false). Defaults to
      * false
      */
@@ -83,6 +87,7 @@ export class WebhookEndpoint extends pulumi.CustomResource {
         if (opts.id) {
             const state = argsOrState as WebhookEndpointState | undefined;
             resourceInputs["apiVersion"] = state ? state.apiVersion : undefined;
+            resourceInputs["application"] = state ? state.application : undefined;
             resourceInputs["connect"] = state ? state.connect : undefined;
             resourceInputs["description"] = state ? state.description : undefined;
             resourceInputs["disabled"] = state ? state.disabled : undefined;
@@ -105,6 +110,7 @@ export class WebhookEndpoint extends pulumi.CustomResource {
             resourceInputs["enabledEvents"] = args ? args.enabledEvents : undefined;
             resourceInputs["metadata"] = args ? args.metadata : undefined;
             resourceInputs["url"] = args ? args.url : undefined;
+            resourceInputs["application"] = undefined /*out*/;
             resourceInputs["secret"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
@@ -123,6 +129,10 @@ export interface WebhookEndpointState {
      * Version.
      */
     apiVersion?: pulumi.Input<string>;
+    /**
+     * The ID of the associated Connect application.
+     */
+    application?: pulumi.Input<string>;
     /**
      * Whether this endpoint should receive events from connected accounts (true), or from your account (false). Defaults to
      * false

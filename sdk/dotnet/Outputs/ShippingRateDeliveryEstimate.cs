@@ -13,15 +13,7 @@ namespace Pulumi.Stripe.Outputs
     [OutputType]
     public sealed class ShippingRateDeliveryEstimate
     {
-        /// <summary>
-        /// List(Resource. The upper bound of the estimated range.
-        /// Please see Delivery Estimate Definition.
-        /// </summary>
         public readonly Outputs.ShippingRateDeliveryEstimateMaximum? Maximum;
-        /// <summary>
-        /// List(Resource). The lower bound of the estimated range. 
-        /// Please see Delivery Estimate Definition.
-        /// </summary>
         public readonly Outputs.ShippingRateDeliveryEstimateMinimum? Minimum;
 
         [OutputConstructor]

@@ -13,13 +13,13 @@ namespace Pulumi.Stripe.Inputs
     public sealed class ShippingRateFixedAmountCurrencyOptionGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Int. (Required) Int. A non-negative integer in cents representing how much to charge.
+        /// A non-negative integer in cents representing how much to charge.
         /// </summary>
         [Input("amount", required: true)]
         public Input<int> Amount { get; set; } = null!;
 
         /// <summary>
-        /// String. Three-letter ISO currency code, in lowercase - [supported currencies](https://stripe.com/docs/currencies).
+        /// Three-letter ISO currency code, in lowercase. Must be a supported currency.
         /// </summary>
         [Input("currency", required: true)]
         public Input<string> Currency { get; set; } = null!;

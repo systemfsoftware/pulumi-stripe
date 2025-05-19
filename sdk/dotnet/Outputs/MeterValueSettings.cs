@@ -11,17 +11,17 @@ namespace Pulumi.Stripe.Outputs
 {
 
     [OutputType]
-    public sealed class PortalConfigurationFeaturesSubscriptionPause
+    public sealed class MeterValueSettings
     {
         /// <summary>
-        /// Whether the feature is enabled.
+        /// The key in the usage event payload to use as the value for this meter. For example, if the event payload  contains usage on a bytes_used field, then set the event_payload_key to “bytes_used”
         /// </summary>
-        public readonly bool? Enabled;
+        public readonly string EventPayloadKey;
 
         [OutputConstructor]
-        private PortalConfigurationFeaturesSubscriptionPause(bool? enabled)
+        private MeterValueSettings(string eventPayloadKey)
         {
-            Enabled = enabled;
+            EventPayloadKey = eventPayloadKey;
         }
     }
 }

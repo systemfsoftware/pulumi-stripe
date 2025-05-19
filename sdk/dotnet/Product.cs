@@ -9,86 +9,90 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Stripe
 {
-    /// <summary>
-    /// ## Example Usage
-    /// </summary>
     [StripeResourceType("stripe:index/product:Product")]
     public partial class Product : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// Bool. Whether the product is currently available for purchase. Defaults to `true`.
+        /// Whether the product is currently available for purchase. Defaults to true.
         /// </summary>
         [Output("active")]
         public Output<bool?> Active { get; private set; } = null!;
 
         /// <summary>
-        /// String. The product’s description, meant to be displayable to the customer. Use this field to optionally store a long form explanation of the product being sold for your own rendering purposes.
+        /// The product’s description, meant to be displayable to the customer. Use this field to optionally store a long form
+        /// explanation of the product being sold for your own rendering purposes.
         /// </summary>
         [Output("description")]
         public Output<string?> Description { get; private set; } = null!;
 
         /// <summary>
-        /// List(String). A list of up to 15 features for this product. These are displayed in pricing tables.
-        /// </summary>
-        [Output("features")]
-        public Output<ImmutableArray<string>> Features { get; private set; } = null!;
-
-        /// <summary>
-        /// List(String). A list of up to 8 URLs of images for this product, meant to be displayable to the customer.
+        /// A list of up to 8 URLs of images for this product, meant to be displayable to the customer.
         /// </summary>
         [Output("images")]
         public Output<ImmutableArray<string>> Images { get; private set; } = null!;
 
         /// <summary>
-        /// Map(String). Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
+        /// A list of up to 15 marketing features for this product. These are displayed in pricing tables.
+        /// </summary>
+        [Output("marketingFeatures")]
+        public Output<ImmutableArray<string>> MarketingFeatures { get; private set; } = null!;
+
+        /// <summary>
+        /// Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the
+        /// object in a structured format.
         /// </summary>
         [Output("metadata")]
         public Output<ImmutableDictionary<string, string>?> Metadata { get; private set; } = null!;
 
         /// <summary>
-        /// String. The product’s name, meant to be displayable to the customer. Whenever this product is sold via a subscription, name will show up on associated invoice line item descriptions.
+        /// The product’s name, meant to be displayable to the customer. Whenever this product is sold via a subscription, name
+        /// will show up on associated invoice line item descriptions.
         /// </summary>
         [Output("name")]
         public Output<string> Name { get; private set; } = null!;
 
         /// <summary>
-        /// Map(Float). The dimensions of this product for shipping purposes. When used these fields are required: `height`,`length`,`width` and `weight`; the precision is 2 decimal places.
+        /// The dimensions of this product for shipping purposes.
         /// </summary>
         [Output("packageDimensions")]
         public Output<ImmutableDictionary<string, double>?> PackageDimensions { get; private set; } = null!;
 
         /// <summary>
-        /// String. The bespoke unique identifier for the object.
+        /// Unique identifier for the object.
         /// </summary>
         [Output("productId")]
         public Output<string> ProductId { get; private set; } = null!;
 
         /// <summary>
-        /// Bool. Whether this product is shipped (i.e., physical goods).
+        /// Whether this product is shipped (i.e., physical goods).
         /// </summary>
         [Output("shippable")]
         public Output<bool?> Shippable { get; private set; } = null!;
 
         /// <summary>
-        /// String. An arbitrary string to be displayed on your customer’s credit card or bank statement. While most banks display this information consistently, some may display it incorrectly or not at all. This may be up to 22 characters. The statement description may not include `&lt;`,` &gt;`, `\`, `"`, `’` characters, and will appear on your customer’s statement in capital letters. Non-ASCII characters are automatically stripped. It must contain at least one letter.
+        /// An arbitrary string to be displayed on your customer’s credit card or bank statement. While most banks display this
+        /// information consistently, some may display it incorrectly or not at all. This may be up to 22 characters. The statement
+        /// description may not include &lt;, &gt;, \, ", ’ characters, and will appear on your customer’s statement in capital
+        /// letters. Non-ASCII characters are automatically stripped. It must contain at least one letter.
         /// </summary>
         [Output("statementDescriptor")]
         public Output<string?> StatementDescriptor { get; private set; } = null!;
 
         /// <summary>
-        /// String. A tax code ID. Supported values are listed in the TaxCode resource and at https://stripe.com/docs/tax/tax-categories.
+        /// A tax code ID. Supported values are listed in the TaxCode resource and at https://stripe.com/docs/tax/tax-categories.
         /// </summary>
         [Output("taxCode")]
         public Output<string?> TaxCode { get; private set; } = null!;
 
         /// <summary>
-        /// String. A label that represents units of this product in Stripe and on customers’ receipts and invoices. When set, this will be included in associated invoice line item descriptions.
+        /// A label that represents units of this product in Stripe and on customers’ receipts and invoices. When set, this will
+        /// be included in associated invoice line item descriptions.
         /// </summary>
         [Output("unitLabel")]
         public Output<string?> UnitLabel { get; private set; } = null!;
 
         /// <summary>
-        /// String. A URL of a publicly-accessible webpage for this product.
+        /// A URL of a publicly-accessible webpage for this product.
         /// </summary>
         [Output("url")]
         public Output<string?> Url { get; private set; } = null!;
@@ -140,34 +144,23 @@ namespace Pulumi.Stripe
     public sealed class ProductArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Bool. Whether the product is currently available for purchase. Defaults to `true`.
+        /// Whether the product is currently available for purchase. Defaults to true.
         /// </summary>
         [Input("active")]
         public Input<bool>? Active { get; set; }
 
         /// <summary>
-        /// String. The product’s description, meant to be displayable to the customer. Use this field to optionally store a long form explanation of the product being sold for your own rendering purposes.
+        /// The product’s description, meant to be displayable to the customer. Use this field to optionally store a long form
+        /// explanation of the product being sold for your own rendering purposes.
         /// </summary>
         [Input("description")]
         public Input<string>? Description { get; set; }
-
-        [Input("features")]
-        private InputList<string>? _features;
-
-        /// <summary>
-        /// List(String). A list of up to 15 features for this product. These are displayed in pricing tables.
-        /// </summary>
-        public InputList<string> Features
-        {
-            get => _features ?? (_features = new InputList<string>());
-            set => _features = value;
-        }
 
         [Input("images")]
         private InputList<string>? _images;
 
         /// <summary>
-        /// List(String). A list of up to 8 URLs of images for this product, meant to be displayable to the customer.
+        /// A list of up to 8 URLs of images for this product, meant to be displayable to the customer.
         /// </summary>
         public InputList<string> Images
         {
@@ -175,11 +168,24 @@ namespace Pulumi.Stripe
             set => _images = value;
         }
 
+        [Input("marketingFeatures")]
+        private InputList<string>? _marketingFeatures;
+
+        /// <summary>
+        /// A list of up to 15 marketing features for this product. These are displayed in pricing tables.
+        /// </summary>
+        public InputList<string> MarketingFeatures
+        {
+            get => _marketingFeatures ?? (_marketingFeatures = new InputList<string>());
+            set => _marketingFeatures = value;
+        }
+
         [Input("metadata")]
         private InputMap<string>? _metadata;
 
         /// <summary>
-        /// Map(String). Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
+        /// Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the
+        /// object in a structured format.
         /// </summary>
         public InputMap<string> Metadata
         {
@@ -188,7 +194,8 @@ namespace Pulumi.Stripe
         }
 
         /// <summary>
-        /// String. The product’s name, meant to be displayable to the customer. Whenever this product is sold via a subscription, name will show up on associated invoice line item descriptions.
+        /// The product’s name, meant to be displayable to the customer. Whenever this product is sold via a subscription, name
+        /// will show up on associated invoice line item descriptions.
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
@@ -197,7 +204,7 @@ namespace Pulumi.Stripe
         private InputMap<double>? _packageDimensions;
 
         /// <summary>
-        /// Map(Float). The dimensions of this product for shipping purposes. When used these fields are required: `height`,`length`,`width` and `weight`; the precision is 2 decimal places.
+        /// The dimensions of this product for shipping purposes.
         /// </summary>
         public InputMap<double> PackageDimensions
         {
@@ -206,37 +213,41 @@ namespace Pulumi.Stripe
         }
 
         /// <summary>
-        /// String. The bespoke unique identifier for the object.
+        /// Unique identifier for the object.
         /// </summary>
         [Input("productId")]
         public Input<string>? ProductId { get; set; }
 
         /// <summary>
-        /// Bool. Whether this product is shipped (i.e., physical goods).
+        /// Whether this product is shipped (i.e., physical goods).
         /// </summary>
         [Input("shippable")]
         public Input<bool>? Shippable { get; set; }
 
         /// <summary>
-        /// String. An arbitrary string to be displayed on your customer’s credit card or bank statement. While most banks display this information consistently, some may display it incorrectly or not at all. This may be up to 22 characters. The statement description may not include `&lt;`,` &gt;`, `\`, `"`, `’` characters, and will appear on your customer’s statement in capital letters. Non-ASCII characters are automatically stripped. It must contain at least one letter.
+        /// An arbitrary string to be displayed on your customer’s credit card or bank statement. While most banks display this
+        /// information consistently, some may display it incorrectly or not at all. This may be up to 22 characters. The statement
+        /// description may not include &lt;, &gt;, \, ", ’ characters, and will appear on your customer’s statement in capital
+        /// letters. Non-ASCII characters are automatically stripped. It must contain at least one letter.
         /// </summary>
         [Input("statementDescriptor")]
         public Input<string>? StatementDescriptor { get; set; }
 
         /// <summary>
-        /// String. A tax code ID. Supported values are listed in the TaxCode resource and at https://stripe.com/docs/tax/tax-categories.
+        /// A tax code ID. Supported values are listed in the TaxCode resource and at https://stripe.com/docs/tax/tax-categories.
         /// </summary>
         [Input("taxCode")]
         public Input<string>? TaxCode { get; set; }
 
         /// <summary>
-        /// String. A label that represents units of this product in Stripe and on customers’ receipts and invoices. When set, this will be included in associated invoice line item descriptions.
+        /// A label that represents units of this product in Stripe and on customers’ receipts and invoices. When set, this will
+        /// be included in associated invoice line item descriptions.
         /// </summary>
         [Input("unitLabel")]
         public Input<string>? UnitLabel { get; set; }
 
         /// <summary>
-        /// String. A URL of a publicly-accessible webpage for this product.
+        /// A URL of a publicly-accessible webpage for this product.
         /// </summary>
         [Input("url")]
         public Input<string>? Url { get; set; }
@@ -250,34 +261,23 @@ namespace Pulumi.Stripe
     public sealed class ProductState : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Bool. Whether the product is currently available for purchase. Defaults to `true`.
+        /// Whether the product is currently available for purchase. Defaults to true.
         /// </summary>
         [Input("active")]
         public Input<bool>? Active { get; set; }
 
         /// <summary>
-        /// String. The product’s description, meant to be displayable to the customer. Use this field to optionally store a long form explanation of the product being sold for your own rendering purposes.
+        /// The product’s description, meant to be displayable to the customer. Use this field to optionally store a long form
+        /// explanation of the product being sold for your own rendering purposes.
         /// </summary>
         [Input("description")]
         public Input<string>? Description { get; set; }
-
-        [Input("features")]
-        private InputList<string>? _features;
-
-        /// <summary>
-        /// List(String). A list of up to 15 features for this product. These are displayed in pricing tables.
-        /// </summary>
-        public InputList<string> Features
-        {
-            get => _features ?? (_features = new InputList<string>());
-            set => _features = value;
-        }
 
         [Input("images")]
         private InputList<string>? _images;
 
         /// <summary>
-        /// List(String). A list of up to 8 URLs of images for this product, meant to be displayable to the customer.
+        /// A list of up to 8 URLs of images for this product, meant to be displayable to the customer.
         /// </summary>
         public InputList<string> Images
         {
@@ -285,11 +285,24 @@ namespace Pulumi.Stripe
             set => _images = value;
         }
 
+        [Input("marketingFeatures")]
+        private InputList<string>? _marketingFeatures;
+
+        /// <summary>
+        /// A list of up to 15 marketing features for this product. These are displayed in pricing tables.
+        /// </summary>
+        public InputList<string> MarketingFeatures
+        {
+            get => _marketingFeatures ?? (_marketingFeatures = new InputList<string>());
+            set => _marketingFeatures = value;
+        }
+
         [Input("metadata")]
         private InputMap<string>? _metadata;
 
         /// <summary>
-        /// Map(String). Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
+        /// Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the
+        /// object in a structured format.
         /// </summary>
         public InputMap<string> Metadata
         {
@@ -298,7 +311,8 @@ namespace Pulumi.Stripe
         }
 
         /// <summary>
-        /// String. The product’s name, meant to be displayable to the customer. Whenever this product is sold via a subscription, name will show up on associated invoice line item descriptions.
+        /// The product’s name, meant to be displayable to the customer. Whenever this product is sold via a subscription, name
+        /// will show up on associated invoice line item descriptions.
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
@@ -307,7 +321,7 @@ namespace Pulumi.Stripe
         private InputMap<double>? _packageDimensions;
 
         /// <summary>
-        /// Map(Float). The dimensions of this product for shipping purposes. When used these fields are required: `height`,`length`,`width` and `weight`; the precision is 2 decimal places.
+        /// The dimensions of this product for shipping purposes.
         /// </summary>
         public InputMap<double> PackageDimensions
         {
@@ -316,37 +330,41 @@ namespace Pulumi.Stripe
         }
 
         /// <summary>
-        /// String. The bespoke unique identifier for the object.
+        /// Unique identifier for the object.
         /// </summary>
         [Input("productId")]
         public Input<string>? ProductId { get; set; }
 
         /// <summary>
-        /// Bool. Whether this product is shipped (i.e., physical goods).
+        /// Whether this product is shipped (i.e., physical goods).
         /// </summary>
         [Input("shippable")]
         public Input<bool>? Shippable { get; set; }
 
         /// <summary>
-        /// String. An arbitrary string to be displayed on your customer’s credit card or bank statement. While most banks display this information consistently, some may display it incorrectly or not at all. This may be up to 22 characters. The statement description may not include `&lt;`,` &gt;`, `\`, `"`, `’` characters, and will appear on your customer’s statement in capital letters. Non-ASCII characters are automatically stripped. It must contain at least one letter.
+        /// An arbitrary string to be displayed on your customer’s credit card or bank statement. While most banks display this
+        /// information consistently, some may display it incorrectly or not at all. This may be up to 22 characters. The statement
+        /// description may not include &lt;, &gt;, \, ", ’ characters, and will appear on your customer’s statement in capital
+        /// letters. Non-ASCII characters are automatically stripped. It must contain at least one letter.
         /// </summary>
         [Input("statementDescriptor")]
         public Input<string>? StatementDescriptor { get; set; }
 
         /// <summary>
-        /// String. A tax code ID. Supported values are listed in the TaxCode resource and at https://stripe.com/docs/tax/tax-categories.
+        /// A tax code ID. Supported values are listed in the TaxCode resource and at https://stripe.com/docs/tax/tax-categories.
         /// </summary>
         [Input("taxCode")]
         public Input<string>? TaxCode { get; set; }
 
         /// <summary>
-        /// String. A label that represents units of this product in Stripe and on customers’ receipts and invoices. When set, this will be included in associated invoice line item descriptions.
+        /// A label that represents units of this product in Stripe and on customers’ receipts and invoices. When set, this will
+        /// be included in associated invoice line item descriptions.
         /// </summary>
         [Input("unitLabel")]
         public Input<string>? UnitLabel { get; set; }
 
         /// <summary>
-        /// String. A URL of a publicly-accessible webpage for this product.
+        /// A URL of a publicly-accessible webpage for this product.
         /// </summary>
         [Input("url")]
         public Input<string>? Url { get; set; }

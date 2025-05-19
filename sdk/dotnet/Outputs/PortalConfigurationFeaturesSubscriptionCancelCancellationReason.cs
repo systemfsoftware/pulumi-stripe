@@ -14,11 +14,11 @@ namespace Pulumi.Stripe.Outputs
     public sealed class PortalConfigurationFeaturesSubscriptionCancelCancellationReason
     {
         /// <summary>
-        /// Bool. Whether the feature is enabled.
+        /// Whether the feature is enabled.
         /// </summary>
         public readonly bool Enabled;
         /// <summary>
-        /// List(String). Which cancellation reasons will be given as options to the customer. Supported values are `too_expensive`, `missing_features`, `switched_service`, `unused`, `customer_service`, `too_complex`, `low_quality`, and `other`.
+        /// Which cancellation reasons will be given as options to the customer.
         /// </summary>
         public readonly ImmutableArray<string> Options;
 

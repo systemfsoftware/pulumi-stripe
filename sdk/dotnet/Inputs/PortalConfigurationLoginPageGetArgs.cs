@@ -13,7 +13,7 @@ namespace Pulumi.Stripe.Inputs
     public sealed class PortalConfigurationLoginPageGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Bool. Set to true to generate a shareable URL login_page.url that will take your customers to a hosted login page for the customer portal.
+        /// Set to true to generate a shareable URL login_page.url that will take your customers to a hosted login page for the customer portal.
         /// </summary>
         [Input("enabled")]
         public Input<bool>? Enabled { get; set; }

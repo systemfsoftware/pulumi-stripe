@@ -9,82 +9,63 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Stripe
 {
-    /// <summary>
-    /// With this resource, you can create a webhook endpoint - [Stripe API webhook endpoint documentation](https://stripe.com/docs/api/webhook_endpoints).
-    /// 
-    /// You can configure webhook endpoints via the API to be notified about events that happen in your Stripe account or connected accounts.
-    /// 
-    /// ## Example Usage
-    /// 
-    /// ```csharp
-    /// using System.Collections.Generic;
-    /// using System.Linq;
-    /// using Pulumi;
-    /// using Stripe = Pulumi.Stripe;
-    /// 
-    /// return await Deployment.RunAsync(() =&gt; 
-    /// {
-    ///     var webhook = new Stripe.WebhookEndpoint("webhook", new()
-    ///     {
-    ///         Url = "https://webhook-url-consumer.com",
-    ///         Description = "example of webhook",
-    ///         EnabledEvents = new[]
-    ///         {
-    ///             "customer.subscription.created",
-    ///             "customer.subscription.updated",
-    ///         },
-    ///     });
-    /// 
-    /// });
-    /// ```
-    /// </summary>
     [StripeResourceType("stripe:index/webhookEndpoint:WebhookEndpoint")]
     public partial class WebhookEndpoint : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// String. Events sent to this endpoint will be generated with this Stripe Version instead of your account’s default Stripe Version.
+        /// Events sent to this endpoint will be generated with this Stripe Version instead of your account’s default Stripe
+        /// Version.
         /// </summary>
         [Output("apiVersion")]
         public Output<string?> ApiVersion { get; private set; } = null!;
 
         /// <summary>
-        /// Bool. Whether this endpoint should receive events from connected accounts (`true`), or from your account (`false`). Defaults to `false`.
+        /// The ID of the associated Connect application.
+        /// </summary>
+        [Output("application")]
+        public Output<string> Application { get; private set; } = null!;
+
+        /// <summary>
+        /// Whether this endpoint should receive events from connected accounts (true), or from your account (false). Defaults to
+        /// false
         /// </summary>
         [Output("connect")]
         public Output<bool?> Connect { get; private set; } = null!;
 
         /// <summary>
-        /// String. Description of what the webhook is used for.
+        /// An optional description of what the webhook is used for.
         /// </summary>
         [Output("description")]
         public Output<string?> Description { get; private set; } = null!;
 
         /// <summary>
-        /// Bool. Disable the webhook endpoint if set to `true`. Can be used only for modification already existing webhook endpoint.
+        /// Disable the webhook endpoint if set to true.
         /// </summary>
         [Output("disabled")]
         public Output<bool?> Disabled { get; private set; } = null!;
 
         /// <summary>
-        /// List(String). The list of events to enable for this endpoint. `[*]` indicates that all events are enabled, except those that require explicit selection. All supported events listed here: [Stripe event types](https://stripe.com/docs/api/events/types).
+        /// The list of events to enable for this endpoint. [’*’] indicates that all events are enabled, except those that
+        /// require explicit selection.
         /// </summary>
         [Output("enabledEvents")]
         public Output<ImmutableArray<string>> EnabledEvents { get; private set; } = null!;
 
         /// <summary>
-        /// Map(String). Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
+        /// Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the
+        /// object in a structured format.
         /// </summary>
         [Output("metadata")]
         public Output<ImmutableDictionary<string, string>?> Metadata { get; private set; } = null!;
 
         /// <summary>
-        /// String. The endpoint’s secret, used to generate webhook signatures. This field is marked as `sensitive`.
+        /// The endpoint’s secret, used to generate webhook signatures. Only returned at creation.
         /// </summary>
         [Output("secret")]
         public Output<string> Secret { get; private set; } = null!;
 
         /// <summary>
-        /// String. The URL of the webhook endpoint.
+        /// The URL of the webhook endpoint.
         /// </summary>
         [Output("url")]
         public Output<string> Url { get; private set; } = null!;
@@ -140,25 +121,27 @@ namespace Pulumi.Stripe
     public sealed class WebhookEndpointArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// String. Events sent to this endpoint will be generated with this Stripe Version instead of your account’s default Stripe Version.
+        /// Events sent to this endpoint will be generated with this Stripe Version instead of your account’s default Stripe
+        /// Version.
         /// </summary>
         [Input("apiVersion")]
         public Input<string>? ApiVersion { get; set; }
 
         /// <summary>
-        /// Bool. Whether this endpoint should receive events from connected accounts (`true`), or from your account (`false`). Defaults to `false`.
+        /// Whether this endpoint should receive events from connected accounts (true), or from your account (false). Defaults to
+        /// false
         /// </summary>
         [Input("connect")]
         public Input<bool>? Connect { get; set; }
 
         /// <summary>
-        /// String. Description of what the webhook is used for.
+        /// An optional description of what the webhook is used for.
         /// </summary>
         [Input("description")]
         public Input<string>? Description { get; set; }
 
         /// <summary>
-        /// Bool. Disable the webhook endpoint if set to `true`. Can be used only for modification already existing webhook endpoint.
+        /// Disable the webhook endpoint if set to true.
         /// </summary>
         [Input("disabled")]
         public Input<bool>? Disabled { get; set; }
@@ -167,7 +150,8 @@ namespace Pulumi.Stripe
         private InputList<string>? _enabledEvents;
 
         /// <summary>
-        /// List(String). The list of events to enable for this endpoint. `[*]` indicates that all events are enabled, except those that require explicit selection. All supported events listed here: [Stripe event types](https://stripe.com/docs/api/events/types).
+        /// The list of events to enable for this endpoint. [’*’] indicates that all events are enabled, except those that
+        /// require explicit selection.
         /// </summary>
         public InputList<string> EnabledEvents
         {
@@ -179,7 +163,8 @@ namespace Pulumi.Stripe
         private InputMap<string>? _metadata;
 
         /// <summary>
-        /// Map(String). Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
+        /// Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the
+        /// object in a structured format.
         /// </summary>
         public InputMap<string> Metadata
         {
@@ -188,7 +173,7 @@ namespace Pulumi.Stripe
         }
 
         /// <summary>
-        /// String. The URL of the webhook endpoint.
+        /// The URL of the webhook endpoint.
         /// </summary>
         [Input("url", required: true)]
         public Input<string> Url { get; set; } = null!;
@@ -202,25 +187,33 @@ namespace Pulumi.Stripe
     public sealed class WebhookEndpointState : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// String. Events sent to this endpoint will be generated with this Stripe Version instead of your account’s default Stripe Version.
+        /// Events sent to this endpoint will be generated with this Stripe Version instead of your account’s default Stripe
+        /// Version.
         /// </summary>
         [Input("apiVersion")]
         public Input<string>? ApiVersion { get; set; }
 
         /// <summary>
-        /// Bool. Whether this endpoint should receive events from connected accounts (`true`), or from your account (`false`). Defaults to `false`.
+        /// The ID of the associated Connect application.
+        /// </summary>
+        [Input("application")]
+        public Input<string>? Application { get; set; }
+
+        /// <summary>
+        /// Whether this endpoint should receive events from connected accounts (true), or from your account (false). Defaults to
+        /// false
         /// </summary>
         [Input("connect")]
         public Input<bool>? Connect { get; set; }
 
         /// <summary>
-        /// String. Description of what the webhook is used for.
+        /// An optional description of what the webhook is used for.
         /// </summary>
         [Input("description")]
         public Input<string>? Description { get; set; }
 
         /// <summary>
-        /// Bool. Disable the webhook endpoint if set to `true`. Can be used only for modification already existing webhook endpoint.
+        /// Disable the webhook endpoint if set to true.
         /// </summary>
         [Input("disabled")]
         public Input<bool>? Disabled { get; set; }
@@ -229,7 +222,8 @@ namespace Pulumi.Stripe
         private InputList<string>? _enabledEvents;
 
         /// <summary>
-        /// List(String). The list of events to enable for this endpoint. `[*]` indicates that all events are enabled, except those that require explicit selection. All supported events listed here: [Stripe event types](https://stripe.com/docs/api/events/types).
+        /// The list of events to enable for this endpoint. [’*’] indicates that all events are enabled, except those that
+        /// require explicit selection.
         /// </summary>
         public InputList<string> EnabledEvents
         {
@@ -241,7 +235,8 @@ namespace Pulumi.Stripe
         private InputMap<string>? _metadata;
 
         /// <summary>
-        /// Map(String). Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
+        /// Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the
+        /// object in a structured format.
         /// </summary>
         public InputMap<string> Metadata
         {
@@ -253,7 +248,7 @@ namespace Pulumi.Stripe
         private Input<string>? _secret;
 
         /// <summary>
-        /// String. The endpoint’s secret, used to generate webhook signatures. This field is marked as `sensitive`.
+        /// The endpoint’s secret, used to generate webhook signatures. Only returned at creation.
         /// </summary>
         public Input<string>? Secret
         {
@@ -266,7 +261,7 @@ namespace Pulumi.Stripe
         }
 
         /// <summary>
-        /// String. The URL of the webhook endpoint.
+        /// The URL of the webhook endpoint.
         /// </summary>
         [Input("url")]
         public Input<string>? Url { get; set; }

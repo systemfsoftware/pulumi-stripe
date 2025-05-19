@@ -14,11 +14,11 @@ namespace Pulumi.Stripe.Outputs
     public sealed class ShippingRateFixedAmountCurrencyOption
     {
         /// <summary>
-        /// Int. (Required) Int. A non-negative integer in cents representing how much to charge.
+        /// A non-negative integer in cents representing how much to charge.
         /// </summary>
         public readonly int Amount;
         /// <summary>
-        /// String. Three-letter ISO currency code, in lowercase - [supported currencies](https://stripe.com/docs/currencies).
+        /// Three-letter ISO currency code, in lowercase. Must be a supported currency.
         /// </summary>
         public readonly string Currency;
         /// <summary>

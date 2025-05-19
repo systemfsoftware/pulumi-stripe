@@ -9,141 +9,125 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Stripe
 {
-    /// <summary>
-    /// With this resource, you can create a price - [Stripe API price documentation](https://stripe.com/docs/api/prices).
-    /// 
-    /// Prices define the unit cost, currency, and (optional) billing cycle for both recurring and one-time purchases of
-    /// products. Products help you track inventory or provisioning, and prices help you track payment terms.
-    /// 
-    /// Different physical goods or levels of service should be represented by products, and pricing options should be
-    /// represented by prices. This approach lets you change prices without having to change your provisioning scheme.
-    /// 
-    /// For example, you might have a single "gold" product that has prices for $10/month, $100/year, and €9 once.
-    /// 
-    /// &gt; Removal of the price isn't supported through the Stripe SDK. The best practice, which this provider follows,
-    /// is to archive the price by marking it as inactive on destroy, which indicates that the price is no longer
-    /// available for purchase.
-    /// </summary>
     [StripeResourceType("stripe:index/price:Price")]
     public partial class Price : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// Bool. Whether the price can be used for new purchases. Defaults to `true`.
+        /// Whether the price can be used for new purchases. Defaults to true.
         /// </summary>
         [Output("active")]
         public Output<bool?> Active { get; private set; } = null!;
 
         /// <summary>
-        /// String. Describes how to compute the price per period. Either `per_unit` or `tiered`
-        /// . `per_unit` indicates that the fixed amount (specified in `unit_amount` or `unit_amount_decimal`) will be charged per
-        /// unit in quantity (for prices with `usage_type=licensed`), or per unit of total usage (for prices
-        /// with `usage_type=metered`). `tiered` indicates that the unit pricing will be computed using a tiering strategy as
-        /// defined using the `tiers` and `tiers_mode` attributes.
+        /// Describes how to compute the price per period. Either per_unit or tiered. per_unit indicates that the fixed amount
+        /// (specified in unit_amount or unit_amount_decimal) will be charged per unit in quantity (for prices with
+        /// usage_type=licensed), or per unit of total usage (for prices with usage_type=metered). tiered indicates that the unit
+        /// pricing will be computed using a tiering strategy as defined using the tiers and tiers_mode attributes.
         /// </summary>
         [Output("billingScheme")]
         public Output<string> BillingScheme { get; private set; } = null!;
 
         /// <summary>
-        /// String. Three-letter ISO currency code, in lowercase - [supported currencies](https://stripe.com/docs/currencies).
+        /// Three-letter ISO currency code, in lowercase.
         /// </summary>
         [Output("currency")]
         public Output<string> Currency { get; private set; } = null!;
 
         /// <summary>
-        /// List(Resource). Prices defined in each available currency option. For details
-        /// of individual arguments see Currency Options.
+        /// Prices defined in each available currency option. Each key must be a three-letter ISO currency code and a supported
+        /// currency
         /// </summary>
         [Output("currencyOptions")]
         public Output<ImmutableArray<Outputs.PriceCurrencyOption>> CurrencyOptions { get; private set; } = null!;
 
         /// <summary>
-        /// String. A lookup key used to retrieve prices dynamically from a static string.
+        /// When set, provides configuration for the amount to be adjusted by the customer during Checkout Sessions and Payment
+        /// Links
+        /// </summary>
+        [Output("customUnitAmount")]
+        public Output<Outputs.PriceCustomUnitAmount?> CustomUnitAmount { get; private set; } = null!;
+
+        /// <summary>
+        /// A lookup key used to retrieve prices dynamically from a static string.
         /// </summary>
         [Output("lookupKey")]
         public Output<string?> LookupKey { get; private set; } = null!;
 
         /// <summary>
-        /// Map(String). Set of key-value pairs that you can attach to an object. This can be useful for
-        /// storing additional information about the object in a structured format.
+        /// Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the
+        /// object in a structured format.
         /// </summary>
         [Output("metadata")]
         public Output<ImmutableDictionary<string, string>?> Metadata { get; private set; } = null!;
 
         /// <summary>
-        /// String. A brief description of the price, hidden from customers.
+        /// A brief description of the price, hidden from customers.
         /// </summary>
         [Output("nickname")]
         public Output<string?> Nickname { get; private set; } = null!;
 
         /// <summary>
-        /// String. The ID of the product that this price will belong to.
+        /// The ID of the product that this price will belong to.
         /// </summary>
         [Output("product")]
         public Output<string> Product { get; private set; } = null!;
 
         /// <summary>
-        /// List(Resource). The recurring components of a price such as `interval` and `usage_type`. For
-        /// details of individual arguments see Recurring.
+        /// The recurring components of a price such as interval and usage_type.
         /// </summary>
         [Output("recurring")]
         public Output<Outputs.PriceRecurring?> Recurring { get; private set; } = null!;
 
         /// <summary>
-        /// String. Specifies whether the price is considered inclusive of taxes or exclusive of
-        /// taxes. One of `inclusive`, `exclusive`, or `unspecified`. Once specified as either `inclusive` or `exclusive`, it
-        /// cannot be changed, default is `unspecified`.
+        /// Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of inclusive, exclusive, or
+        /// unspecified. Once specified as either inclusive or exclusive, it cannot be changed.
         /// </summary>
-        [Output("taxBehaviour")]
-        public Output<string?> TaxBehaviour { get; private set; } = null!;
+        [Output("taxBehavior")]
+        public Output<string?> TaxBehavior { get; private set; } = null!;
 
         /// <summary>
-        /// List(Resource). Each element represents a pricing tier. This parameter requires `billing_scheme`
-        /// to be set to `tiered`. See also the documentation for `billing_scheme`. For details of individual arguments
-        /// see Tiers.
+        /// Each element represents a pricing tier. This parameter requires billing_scheme to be set to tiered. See also the
+        /// documentation for billing_scheme.
         /// </summary>
         [Output("tiers")]
         public Output<ImmutableArray<Outputs.PriceTier>> Tiers { get; private set; } = null!;
 
         /// <summary>
-        /// String. Defines if the tiering price should be `graduated`
-        /// or `volume` based. In `volume`-based tiering, the maximum quantity within a period determines the per-unit price,
-        /// in `graduated` tiering pricing can successively change as the quantity grows.
+        /// Defines if the tiering price should be graduated or volume based. In volume-based tiering, the maximum quantity within a
+        /// period determines the per unit price, in graduated tiering pricing can successively change as the quantity grows.
         /// </summary>
         [Output("tiersMode")]
         public Output<string?> TiersMode { get; private set; } = null!;
 
         /// <summary>
-        /// Bool. If set to `true`, will atomically remove the lookup key from the existing
-        /// price, and assign it to this price.
+        /// If set to true, will atomically remove the lookup key from the existing price, and assign it to this price.
         /// </summary>
         [Output("transferLookupKey")]
         public Output<bool?> TransferLookupKey { get; private set; } = null!;
 
         /// <summary>
-        /// List(Resource). Apply a transformation to the reported usage or set quantity before
-        /// computing the billed price. Cannot be combined with `tiers`. For details of individual arguments
-        /// see Transform Quantity.
+        /// Apply a transformation to the reported usage or set quantity before computing the billed price. Cannot be combined with
+        /// tiers
         /// </summary>
         [Output("transformQuantity")]
         public Output<Outputs.PriceTransformQuantity?> TransformQuantity { get; private set; } = null!;
 
         /// <summary>
-        /// String. One of `one_time` or `recurring` depending on whether the price is for a one-time purchase or a
-        /// recurring (subscription) purchase.
+        /// One of one_time or recurring depending on whether the price is for a one-time purchase or a recurring (subscription)
+        /// purchase
         /// </summary>
         [Output("type")]
         public Output<string> Type { get; private set; } = null!;
 
         /// <summary>
-        /// Int. A positive integer in cents (or `-1` for a free
-        /// price) representing how much to charge.
+        /// A positive integer in cents (or -1 for a free price) representing how much to charge.
         /// </summary>
         [Output("unitAmount")]
         public Output<int> UnitAmount { get; private set; } = null!;
 
         /// <summary>
-        /// Float. Same as `unit_amount`, but accepts a decimal value in cents with at most 12
-        /// decimal places. Only one of `unit_amount` and `unit_amount_decimal` can be set.
+        /// Same as unit_amount, but accepts a decimal value in cents with at most 12 decimal places. Only one of unit_amount and
+        /// unit_amount_decimal can be set
         /// </summary>
         [Output("unitAmountDecimal")]
         public Output<double> UnitAmountDecimal { get; private set; } = null!;
@@ -195,23 +179,22 @@ namespace Pulumi.Stripe
     public sealed class PriceArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Bool. Whether the price can be used for new purchases. Defaults to `true`.
+        /// Whether the price can be used for new purchases. Defaults to true.
         /// </summary>
         [Input("active")]
         public Input<bool>? Active { get; set; }
 
         /// <summary>
-        /// String. Describes how to compute the price per period. Either `per_unit` or `tiered`
-        /// . `per_unit` indicates that the fixed amount (specified in `unit_amount` or `unit_amount_decimal`) will be charged per
-        /// unit in quantity (for prices with `usage_type=licensed`), or per unit of total usage (for prices
-        /// with `usage_type=metered`). `tiered` indicates that the unit pricing will be computed using a tiering strategy as
-        /// defined using the `tiers` and `tiers_mode` attributes.
+        /// Describes how to compute the price per period. Either per_unit or tiered. per_unit indicates that the fixed amount
+        /// (specified in unit_amount or unit_amount_decimal) will be charged per unit in quantity (for prices with
+        /// usage_type=licensed), or per unit of total usage (for prices with usage_type=metered). tiered indicates that the unit
+        /// pricing will be computed using a tiering strategy as defined using the tiers and tiers_mode attributes.
         /// </summary>
         [Input("billingScheme")]
         public Input<string>? BillingScheme { get; set; }
 
         /// <summary>
-        /// String. Three-letter ISO currency code, in lowercase - [supported currencies](https://stripe.com/docs/currencies).
+        /// Three-letter ISO currency code, in lowercase.
         /// </summary>
         [Input("currency", required: true)]
         public Input<string> Currency { get; set; } = null!;
@@ -220,8 +203,8 @@ namespace Pulumi.Stripe
         private InputList<Inputs.PriceCurrencyOptionArgs>? _currencyOptions;
 
         /// <summary>
-        /// List(Resource). Prices defined in each available currency option. For details
-        /// of individual arguments see Currency Options.
+        /// Prices defined in each available currency option. Each key must be a three-letter ISO currency code and a supported
+        /// currency
         /// </summary>
         public InputList<Inputs.PriceCurrencyOptionArgs> CurrencyOptions
         {
@@ -230,7 +213,14 @@ namespace Pulumi.Stripe
         }
 
         /// <summary>
-        /// String. A lookup key used to retrieve prices dynamically from a static string.
+        /// When set, provides configuration for the amount to be adjusted by the customer during Checkout Sessions and Payment
+        /// Links
+        /// </summary>
+        [Input("customUnitAmount")]
+        public Input<Inputs.PriceCustomUnitAmountArgs>? CustomUnitAmount { get; set; }
+
+        /// <summary>
+        /// A lookup key used to retrieve prices dynamically from a static string.
         /// </summary>
         [Input("lookupKey")]
         public Input<string>? LookupKey { get; set; }
@@ -239,8 +229,8 @@ namespace Pulumi.Stripe
         private InputMap<string>? _metadata;
 
         /// <summary>
-        /// Map(String). Set of key-value pairs that you can attach to an object. This can be useful for
-        /// storing additional information about the object in a structured format.
+        /// Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the
+        /// object in a structured format.
         /// </summary>
         public InputMap<string> Metadata
         {
@@ -249,39 +239,36 @@ namespace Pulumi.Stripe
         }
 
         /// <summary>
-        /// String. A brief description of the price, hidden from customers.
+        /// A brief description of the price, hidden from customers.
         /// </summary>
         [Input("nickname")]
         public Input<string>? Nickname { get; set; }
 
         /// <summary>
-        /// String. The ID of the product that this price will belong to.
+        /// The ID of the product that this price will belong to.
         /// </summary>
         [Input("product", required: true)]
         public Input<string> Product { get; set; } = null!;
 
         /// <summary>
-        /// List(Resource). The recurring components of a price such as `interval` and `usage_type`. For
-        /// details of individual arguments see Recurring.
+        /// The recurring components of a price such as interval and usage_type.
         /// </summary>
         [Input("recurring")]
         public Input<Inputs.PriceRecurringArgs>? Recurring { get; set; }
 
         /// <summary>
-        /// String. Specifies whether the price is considered inclusive of taxes or exclusive of
-        /// taxes. One of `inclusive`, `exclusive`, or `unspecified`. Once specified as either `inclusive` or `exclusive`, it
-        /// cannot be changed, default is `unspecified`.
+        /// Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of inclusive, exclusive, or
+        /// unspecified. Once specified as either inclusive or exclusive, it cannot be changed.
         /// </summary>
-        [Input("taxBehaviour")]
-        public Input<string>? TaxBehaviour { get; set; }
+        [Input("taxBehavior")]
+        public Input<string>? TaxBehavior { get; set; }
 
         [Input("tiers")]
         private InputList<Inputs.PriceTierArgs>? _tiers;
 
         /// <summary>
-        /// List(Resource). Each element represents a pricing tier. This parameter requires `billing_scheme`
-        /// to be set to `tiered`. See also the documentation for `billing_scheme`. For details of individual arguments
-        /// see Tiers.
+        /// Each element represents a pricing tier. This parameter requires billing_scheme to be set to tiered. See also the
+        /// documentation for billing_scheme.
         /// </summary>
         public InputList<Inputs.PriceTierArgs> Tiers
         {
@@ -290,38 +277,34 @@ namespace Pulumi.Stripe
         }
 
         /// <summary>
-        /// String. Defines if the tiering price should be `graduated`
-        /// or `volume` based. In `volume`-based tiering, the maximum quantity within a period determines the per-unit price,
-        /// in `graduated` tiering pricing can successively change as the quantity grows.
+        /// Defines if the tiering price should be graduated or volume based. In volume-based tiering, the maximum quantity within a
+        /// period determines the per unit price, in graduated tiering pricing can successively change as the quantity grows.
         /// </summary>
         [Input("tiersMode")]
         public Input<string>? TiersMode { get; set; }
 
         /// <summary>
-        /// Bool. If set to `true`, will atomically remove the lookup key from the existing
-        /// price, and assign it to this price.
+        /// If set to true, will atomically remove the lookup key from the existing price, and assign it to this price.
         /// </summary>
         [Input("transferLookupKey")]
         public Input<bool>? TransferLookupKey { get; set; }
 
         /// <summary>
-        /// List(Resource). Apply a transformation to the reported usage or set quantity before
-        /// computing the billed price. Cannot be combined with `tiers`. For details of individual arguments
-        /// see Transform Quantity.
+        /// Apply a transformation to the reported usage or set quantity before computing the billed price. Cannot be combined with
+        /// tiers
         /// </summary>
         [Input("transformQuantity")]
         public Input<Inputs.PriceTransformQuantityArgs>? TransformQuantity { get; set; }
 
         /// <summary>
-        /// Int. A positive integer in cents (or `-1` for a free
-        /// price) representing how much to charge.
+        /// A positive integer in cents (or -1 for a free price) representing how much to charge.
         /// </summary>
         [Input("unitAmount")]
         public Input<int>? UnitAmount { get; set; }
 
         /// <summary>
-        /// Float. Same as `unit_amount`, but accepts a decimal value in cents with at most 12
-        /// decimal places. Only one of `unit_amount` and `unit_amount_decimal` can be set.
+        /// Same as unit_amount, but accepts a decimal value in cents with at most 12 decimal places. Only one of unit_amount and
+        /// unit_amount_decimal can be set
         /// </summary>
         [Input("unitAmountDecimal")]
         public Input<double>? UnitAmountDecimal { get; set; }
@@ -335,23 +318,22 @@ namespace Pulumi.Stripe
     public sealed class PriceState : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Bool. Whether the price can be used for new purchases. Defaults to `true`.
+        /// Whether the price can be used for new purchases. Defaults to true.
         /// </summary>
         [Input("active")]
         public Input<bool>? Active { get; set; }
 
         /// <summary>
-        /// String. Describes how to compute the price per period. Either `per_unit` or `tiered`
-        /// . `per_unit` indicates that the fixed amount (specified in `unit_amount` or `unit_amount_decimal`) will be charged per
-        /// unit in quantity (for prices with `usage_type=licensed`), or per unit of total usage (for prices
-        /// with `usage_type=metered`). `tiered` indicates that the unit pricing will be computed using a tiering strategy as
-        /// defined using the `tiers` and `tiers_mode` attributes.
+        /// Describes how to compute the price per period. Either per_unit or tiered. per_unit indicates that the fixed amount
+        /// (specified in unit_amount or unit_amount_decimal) will be charged per unit in quantity (for prices with
+        /// usage_type=licensed), or per unit of total usage (for prices with usage_type=metered). tiered indicates that the unit
+        /// pricing will be computed using a tiering strategy as defined using the tiers and tiers_mode attributes.
         /// </summary>
         [Input("billingScheme")]
         public Input<string>? BillingScheme { get; set; }
 
         /// <summary>
-        /// String. Three-letter ISO currency code, in lowercase - [supported currencies](https://stripe.com/docs/currencies).
+        /// Three-letter ISO currency code, in lowercase.
         /// </summary>
         [Input("currency")]
         public Input<string>? Currency { get; set; }
@@ -360,8 +342,8 @@ namespace Pulumi.Stripe
         private InputList<Inputs.PriceCurrencyOptionGetArgs>? _currencyOptions;
 
         /// <summary>
-        /// List(Resource). Prices defined in each available currency option. For details
-        /// of individual arguments see Currency Options.
+        /// Prices defined in each available currency option. Each key must be a three-letter ISO currency code and a supported
+        /// currency
         /// </summary>
         public InputList<Inputs.PriceCurrencyOptionGetArgs> CurrencyOptions
         {
@@ -370,7 +352,14 @@ namespace Pulumi.Stripe
         }
 
         /// <summary>
-        /// String. A lookup key used to retrieve prices dynamically from a static string.
+        /// When set, provides configuration for the amount to be adjusted by the customer during Checkout Sessions and Payment
+        /// Links
+        /// </summary>
+        [Input("customUnitAmount")]
+        public Input<Inputs.PriceCustomUnitAmountGetArgs>? CustomUnitAmount { get; set; }
+
+        /// <summary>
+        /// A lookup key used to retrieve prices dynamically from a static string.
         /// </summary>
         [Input("lookupKey")]
         public Input<string>? LookupKey { get; set; }
@@ -379,8 +368,8 @@ namespace Pulumi.Stripe
         private InputMap<string>? _metadata;
 
         /// <summary>
-        /// Map(String). Set of key-value pairs that you can attach to an object. This can be useful for
-        /// storing additional information about the object in a structured format.
+        /// Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the
+        /// object in a structured format.
         /// </summary>
         public InputMap<string> Metadata
         {
@@ -389,39 +378,36 @@ namespace Pulumi.Stripe
         }
 
         /// <summary>
-        /// String. A brief description of the price, hidden from customers.
+        /// A brief description of the price, hidden from customers.
         /// </summary>
         [Input("nickname")]
         public Input<string>? Nickname { get; set; }
 
         /// <summary>
-        /// String. The ID of the product that this price will belong to.
+        /// The ID of the product that this price will belong to.
         /// </summary>
         [Input("product")]
         public Input<string>? Product { get; set; }
 
         /// <summary>
-        /// List(Resource). The recurring components of a price such as `interval` and `usage_type`. For
-        /// details of individual arguments see Recurring.
+        /// The recurring components of a price such as interval and usage_type.
         /// </summary>
         [Input("recurring")]
         public Input<Inputs.PriceRecurringGetArgs>? Recurring { get; set; }
 
         /// <summary>
-        /// String. Specifies whether the price is considered inclusive of taxes or exclusive of
-        /// taxes. One of `inclusive`, `exclusive`, or `unspecified`. Once specified as either `inclusive` or `exclusive`, it
-        /// cannot be changed, default is `unspecified`.
+        /// Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of inclusive, exclusive, or
+        /// unspecified. Once specified as either inclusive or exclusive, it cannot be changed.
         /// </summary>
-        [Input("taxBehaviour")]
-        public Input<string>? TaxBehaviour { get; set; }
+        [Input("taxBehavior")]
+        public Input<string>? TaxBehavior { get; set; }
 
         [Input("tiers")]
         private InputList<Inputs.PriceTierGetArgs>? _tiers;
 
         /// <summary>
-        /// List(Resource). Each element represents a pricing tier. This parameter requires `billing_scheme`
-        /// to be set to `tiered`. See also the documentation for `billing_scheme`. For details of individual arguments
-        /// see Tiers.
+        /// Each element represents a pricing tier. This parameter requires billing_scheme to be set to tiered. See also the
+        /// documentation for billing_scheme.
         /// </summary>
         public InputList<Inputs.PriceTierGetArgs> Tiers
         {
@@ -430,45 +416,41 @@ namespace Pulumi.Stripe
         }
 
         /// <summary>
-        /// String. Defines if the tiering price should be `graduated`
-        /// or `volume` based. In `volume`-based tiering, the maximum quantity within a period determines the per-unit price,
-        /// in `graduated` tiering pricing can successively change as the quantity grows.
+        /// Defines if the tiering price should be graduated or volume based. In volume-based tiering, the maximum quantity within a
+        /// period determines the per unit price, in graduated tiering pricing can successively change as the quantity grows.
         /// </summary>
         [Input("tiersMode")]
         public Input<string>? TiersMode { get; set; }
 
         /// <summary>
-        /// Bool. If set to `true`, will atomically remove the lookup key from the existing
-        /// price, and assign it to this price.
+        /// If set to true, will atomically remove the lookup key from the existing price, and assign it to this price.
         /// </summary>
         [Input("transferLookupKey")]
         public Input<bool>? TransferLookupKey { get; set; }
 
         /// <summary>
-        /// List(Resource). Apply a transformation to the reported usage or set quantity before
-        /// computing the billed price. Cannot be combined with `tiers`. For details of individual arguments
-        /// see Transform Quantity.
+        /// Apply a transformation to the reported usage or set quantity before computing the billed price. Cannot be combined with
+        /// tiers
         /// </summary>
         [Input("transformQuantity")]
         public Input<Inputs.PriceTransformQuantityGetArgs>? TransformQuantity { get; set; }
 
         /// <summary>
-        /// String. One of `one_time` or `recurring` depending on whether the price is for a one-time purchase or a
-        /// recurring (subscription) purchase.
+        /// One of one_time or recurring depending on whether the price is for a one-time purchase or a recurring (subscription)
+        /// purchase
         /// </summary>
         [Input("type")]
         public Input<string>? Type { get; set; }
 
         /// <summary>
-        /// Int. A positive integer in cents (or `-1` for a free
-        /// price) representing how much to charge.
+        /// A positive integer in cents (or -1 for a free price) representing how much to charge.
         /// </summary>
         [Input("unitAmount")]
         public Input<int>? UnitAmount { get; set; }
 
         /// <summary>
-        /// Float. Same as `unit_amount`, but accepts a decimal value in cents with at most 12
-        /// decimal places. Only one of `unit_amount` and `unit_amount_decimal` can be set.
+        /// Same as unit_amount, but accepts a decimal value in cents with at most 12 decimal places. Only one of unit_amount and
+        /// unit_amount_decimal can be set
         /// </summary>
         [Input("unitAmountDecimal")]
         public Input<double>? UnitAmountDecimal { get; set; }

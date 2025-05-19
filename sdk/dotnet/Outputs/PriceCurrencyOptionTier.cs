@@ -14,27 +14,23 @@ namespace Pulumi.Stripe.Outputs
     public sealed class PriceCurrencyOptionTier
     {
         /// <summary>
-        /// Int. The flat billing amount for an entire tier, regardless of the number of units in the
-        /// tier.
+        /// The flat billing amount for an entire tier, regardless of the number of units in the tier.
         /// </summary>
         public readonly int? FlatAmount;
         /// <summary>
-        /// Float. Same as `flat_amount`, but accepts a decimal value representing an integer
-        /// in the minor units of the currency. Only one of `flat_amount` and `flat_amount_decimal` can be set.
+        /// Same as flat_amount, but accepts a decimal value representing an integer in the minor units of the currency. Only one of flat_amount and flat_amount_decimal can be set.
         /// </summary>
         public readonly double? FlatAmountDecimal;
         /// <summary>
-        /// Int. The per-unit billing amount for each individual unit for which this tier applies.
+        /// The per unit billing amount for each individual unit for which this tier applies.
         /// </summary>
         public readonly int? UnitAmount;
         /// <summary>
-        /// Float. Same as `unit_amount`, but accepts a decimal value in cents with at most 12
-        /// decimal places. Only one of `unit_amount` and `unit_amount_decimal` can be set.
+        /// Same as unit_amount, but accepts a decimal value in cents with at most 12 decimal places. Only one of unit_amount and unit_amount_decimal can be set.
         /// </summary>
         public readonly double? UnitAmountDecimal;
         /// <summary>
-        /// Int. Specifies the upper bound of this tier. The lower bound of a tier is the upper bound of the
-        /// previous tier adding one. Use `-1` to define a fallback tier.
+        /// Specifies the upper bound of this tier. The lower bound of a tier is the upper bound of the previous tier adding one. Use -1 to define a fallback tier.
         /// </summary>
         public readonly int? UpTo;
 

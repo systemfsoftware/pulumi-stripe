@@ -6,8 +6,10 @@ toolchain go1.23.0
 
 replace github.com/hashicorp/terraform-plugin-sdk/v2 => github.com/pulumi/terraform-plugin-sdk/v2 v2.0.0-20250221232320-8d4cfd37a3cd
 
+replace github.com/lukasaron/terraform-provider-stripe => github.com/lukasaron/terraform-provider-stripe v0.0.0-20241018030430-7c7b0f985e5a
+
 require (
-	github.com/lukasaron/terraform-provider-stripe v1.9.6
+	github.com/lukasaron/terraform-provider-stripe v0.0.0-20241018030430-7c7b0f985e5a
 	github.com/pulumi/pulumi-terraform-bridge/v3 v3.108.0
 	github.com/pulumi/pulumi/pkg/v3 v3.166.0
 )
@@ -85,7 +87,7 @@ require (
 	github.com/hashicorp/terraform-plugin-sdk/v2 v2.35.0 // indirect
 	github.com/hashicorp/terraform-registry-address v0.2.4 // indirect
 	github.com/hashicorp/terraform-svchost v0.1.1 // indirect
-	github.com/hashicorp/yamux v0.1.1 // indirect
+	github.com/hashicorp/yamux v0.1.2 // indirect
 	github.com/huandu/xstrings v1.3.3 // indirect
 	github.com/iancoleman/strcase v0.3.0 // indirect
 	github.com/imdario/mergo v0.3.15 // indirect
@@ -149,6 +151,7 @@ require (
 	github.com/spf13/cobra v1.9.1 // indirect
 	github.com/spf13/pflag v1.0.6 // indirect
 	github.com/stripe/stripe-go/v76 v76.23.0 // indirect
+	github.com/stripe/stripe-go/v78 v78.12.0 // indirect
 	github.com/teekennedy/goldmark-markdown v0.3.0 // indirect
 	github.com/texttheater/golang-levenshtein v1.0.1 // indirect
 	github.com/uber/jaeger-client-go v2.30.0+incompatible // indirect
@@ -177,7 +180,7 @@ require (
 	golang.org/x/term v0.29.0 // indirect
 	golang.org/x/text v0.22.0 // indirect
 	golang.org/x/time v0.5.0 // indirect
-	golang.org/x/tools v0.23.0 // indirect
+	golang.org/x/tools v0.26.0 // indirect
 	google.golang.org/api v0.169.0 // indirect
 	google.golang.org/appengine v1.6.8 // indirect
 	google.golang.org/genproto v0.0.0-20240311173647-c811ad7063a7 // indirect

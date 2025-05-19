@@ -13,26 +13,25 @@ namespace Pulumi.Stripe.Inputs
     public sealed class PriceCurrencyOptionCustomUnitAmountArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Bool. Pass in `true` to enable `custom_unit_amount`, otherwise omit `custom_unit_amount`.
+        /// Pass in true to enable custom_unit_amount, otherwise omit custom_unit_amount
         /// </summary>
         [Input("enabled", required: true)]
         public Input<bool> Enabled { get; set; } = null!;
 
         /// <summary>
-        /// Int. The maximum unit amount the customer can specify for this item.
+        /// The maximum unit amount the customer can specify for this item.
         /// </summary>
         [Input("maximum")]
         public Input<int>? Maximum { get; set; }
 
         /// <summary>
-        /// Int. The minimum unit amount the customer can specify for this item. 
-        /// Must be at least the minimum charge amount.
+        /// The minimum unit amount the customer can specify for this item. Must be at least the minimum charge amount.
         /// </summary>
         [Input("minimum")]
         public Input<int>? Minimum { get; set; }
 
         /// <summary>
-        /// Int. The starting unit amount which can be updated by the customer.
+        /// The starting unit amount which can be updated by the customer.
         /// </summary>
         [Input("preset")]
         public Input<int>? Preset { get; set; }

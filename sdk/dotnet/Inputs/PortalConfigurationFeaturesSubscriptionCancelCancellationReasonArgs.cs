@@ -13,7 +13,7 @@ namespace Pulumi.Stripe.Inputs
     public sealed class PortalConfigurationFeaturesSubscriptionCancelCancellationReasonArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Bool. Whether the feature is enabled.
+        /// Whether the feature is enabled.
         /// </summary>
         [Input("enabled", required: true)]
         public Input<bool> Enabled { get; set; } = null!;
@@ -22,7 +22,7 @@ namespace Pulumi.Stripe.Inputs
         private InputList<string>? _options;
 
         /// <summary>
-        /// List(String). Which cancellation reasons will be given as options to the customer. Supported values are `too_expensive`, `missing_features`, `switched_service`, `unused`, `customer_service`, `too_complex`, `low_quality`, and `other`.
+        /// Which cancellation reasons will be given as options to the customer.
         /// </summary>
         public InputList<string> Options
         {

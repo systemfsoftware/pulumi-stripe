@@ -12,17 +12,9 @@ namespace Pulumi.Stripe.Inputs
 
     public sealed class ShippingRateDeliveryEstimateGetArgs : global::Pulumi.ResourceArgs
     {
-        /// <summary>
-        /// List(Resource. The upper bound of the estimated range.
-        /// Please see Delivery Estimate Definition.
-        /// </summary>
         [Input("maximum")]
         public Input<Inputs.ShippingRateDeliveryEstimateMaximumGetArgs>? Maximum { get; set; }
 
-        /// <summary>
-        /// List(Resource). The lower bound of the estimated range. 
-        /// Please see Delivery Estimate Definition.
-        /// </summary>
         [Input("minimum")]
         public Input<Inputs.ShippingRateDeliveryEstimateMinimumGetArgs>? Minimum { get; set; }
 

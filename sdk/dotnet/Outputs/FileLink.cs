@@ -14,36 +14,35 @@ namespace Pulumi.Stripe.Outputs
     public sealed class FileLink
     {
         /// <summary>
-        /// String. Time at which the object was created. Measured in seconds since the Unix epoch.
+        /// Time at which the object was created. Measured in seconds since the Unix epoch.
         /// </summary>
         public readonly int? Created;
         /// <summary>
-        /// Bool. Returns if the link is already expired.
+        /// Returns if the link is already expired.
         /// </summary>
         public readonly bool? Expired;
         /// <summary>
-        /// Int. Time that the link expires.
+        /// Time that the link expires
         /// </summary>
         public readonly int? ExpiresAt;
         /// <summary>
-        /// String. Unique identifier for the object.
+        /// Unique identifier for the object.
         /// </summary>
         public readonly string? Id;
         /// <summary>
-        /// Bool. Has the value `true` if the object exists in live mode or the value `false` 
-        /// if the object exists in test mode.
+        /// Has the value true if the object exists in live mode or the value false if the object exists in test mode.
         /// </summary>
         public readonly bool? Livemode;
         /// <summary>
-        /// Map(String). Set of key-value pairs that you can attach to an object.
+        /// Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
         /// </summary>
         public readonly ImmutableDictionary<string, string>? Metadata;
         /// <summary>
-        /// String. String representing the object’s type. Objects of the same type share the same value.
+        /// String representing the object’s type. Objects of the same type share the same value.
         /// </summary>
         public readonly string? Object;
         /// <summary>
-        /// String. The publicly accessible URL to download the file.
+        /// The publicly accessible URL to download the file.
         /// </summary>
         public readonly string? Url;
 

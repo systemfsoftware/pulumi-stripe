@@ -9,98 +9,69 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Stripe
 {
-    /// <summary>
-    /// With this resource, you can create a tax rate - [Stripe API tax rate  documentation](https://stripe.com/docs/api/tax_rates).
-    /// 
-    /// Tax rates can be applied to invoices, subscriptions and Checkout Sessions to collect tax.
-    /// 
-    /// ## Example Usage
-    /// 
-    /// ```csharp
-    /// using System.Collections.Generic;
-    /// using System.Linq;
-    /// using Pulumi;
-    /// using Stripe = Pulumi.Stripe;
-    /// 
-    /// return await Deployment.RunAsync(() =&gt; 
-    /// {
-    ///     var taxRate = new Stripe.TaxRate("tax_rate", new()
-    ///     {
-    ///         DisplayName = "GST",
-    ///         Inclusive = true,
-    ///         Percentage = 10,
-    ///         Active = true,
-    ///         Country = "AU",
-    ///         Description = "GST Australia",
-    ///         Jurisdiction = "AU",
-    ///         State = "",
-    ///         TaxType = "",
-    ///         Metadata = null,
-    ///     });
-    /// 
-    /// });
-    /// ```
-    /// </summary>
     [StripeResourceType("stripe:index/taxRate:TaxRate")]
     public partial class TaxRate : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// Bool. Flag determining whether the tax rate is active or inactive (archived). Inactive tax rates cannot be used with new applications or Checkout Sessions, but will still work for subscriptions and invoices that already have it set.
+        /// Flag determining whether the tax rate is active or inactive (archived). Inactive tax rates cannot be used with new
+        /// applications or Checkout Sessions, but will still work for subscriptions and invoices that already have it set.
         /// </summary>
         [Output("active")]
         public Output<bool?> Active { get; private set; } = null!;
 
         /// <summary>
-        /// String. Two-letter country code (ISO 3166-1 alpha-2).
+        /// Two-letter country code (ISO 3166-1 alpha-2).
         /// </summary>
         [Output("country")]
         public Output<string?> Country { get; private set; } = null!;
 
         /// <summary>
-        /// Int. Time at which the object was created. Measured in seconds since the Unix epoch.
+        /// Time at which the object was created. Measured in seconds since the Unix epoch.
         /// </summary>
         [Output("created")]
         public Output<int> Created { get; private set; } = null!;
 
         /// <summary>
-        /// String. An arbitrary string attached to the tax rate for your internal use only. It will not be visible to your customers.
+        /// An arbitrary string attached to the tax rate for your internal use only. It will not be visible to your customers.
         /// </summary>
         [Output("description")]
         public Output<string?> Description { get; private set; } = null!;
 
         /// <summary>
-        /// String. The display name of the tax rate, which will be shown to users.
+        /// The display name of the tax rate, which will be shown to users.
         /// </summary>
         [Output("displayName")]
         public Output<string> DisplayName { get; private set; } = null!;
 
         /// <summary>
-        /// Bool. This specifies if the tax rate is inclusive or exclusive.
-        /// * `percentage ` - (Required) Float. This represents the tax rate percent out of 100.
+        /// This specifies if the tax rate is inclusive or exclusive.
         /// </summary>
         [Output("inclusive")]
         public Output<bool> Inclusive { get; private set; } = null!;
 
         /// <summary>
-        /// String. The jurisdiction for the tax rate. You can use this label field for tax reporting purposes. It also appears on your customer’s invoice.
+        /// The jurisdiction for the tax rate. You can use this label field for tax reporting purposes.It also appears on your
+        /// customer’s invoice.
         /// </summary>
         [Output("jurisdiction")]
         public Output<string?> Jurisdiction { get; private set; } = null!;
 
         /// <summary>
-        /// Bool. Has the value true if the object exists in live mode or the value false if the object exists in test mode.
+        /// Has the value true if the object exists in live mode or the value false if the object exists in test mode.
         /// </summary>
         [Output("livemode")]
         public Output<bool> Livemode { get; private set; } = null!;
 
         /// <summary>
-        /// Map(String). Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the object in a structured format. Individual keys can be unset by posting an empty value to them. All keys can be unset by posting an empty value to metadata.
+        /// Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the
+        /// object in a structured format. Individual keys can be unset by posting an empty value to them. All keys can be unset by
+        /// posting an empty value to metadata.
         /// </summary>
         [Output("metadata")]
         public Output<ImmutableDictionary<string, string>?> Metadata { get; private set; } = null!;
 
         /// <summary>
-        /// String. String representing the object’s type. Objects of the same type share the same value.
+        /// String representing the object’s type. Objects of the same type share the same value.
         /// </summary>
         [Output("object")]
         public Output<string> Object { get; private set; } = null!;
@@ -112,13 +83,13 @@ namespace Pulumi.Stripe
         public Output<double> Percentage { get; private set; } = null!;
 
         /// <summary>
-        /// String. ISO 3166-2 subdivision code, without country prefix. For example, “NY” for New York, United States.
+        /// ISO 3166-2 subdivision code, without country prefix. For example, “NY” for New York, United States.
         /// </summary>
         [Output("state")]
         public Output<string?> State { get; private set; } = null!;
 
         /// <summary>
-        /// String. The high-level tax type, such as vat or sales_tax.
+        /// The high-level tax type, such as vat or sales_tax.
         /// </summary>
         [Output("taxType")]
         public Output<string?> TaxType { get; private set; } = null!;
@@ -170,38 +141,39 @@ namespace Pulumi.Stripe
     public sealed class TaxRateArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Bool. Flag determining whether the tax rate is active or inactive (archived). Inactive tax rates cannot be used with new applications or Checkout Sessions, but will still work for subscriptions and invoices that already have it set.
+        /// Flag determining whether the tax rate is active or inactive (archived). Inactive tax rates cannot be used with new
+        /// applications or Checkout Sessions, but will still work for subscriptions and invoices that already have it set.
         /// </summary>
         [Input("active")]
         public Input<bool>? Active { get; set; }
 
         /// <summary>
-        /// String. Two-letter country code (ISO 3166-1 alpha-2).
+        /// Two-letter country code (ISO 3166-1 alpha-2).
         /// </summary>
         [Input("country")]
         public Input<string>? Country { get; set; }
 
         /// <summary>
-        /// String. An arbitrary string attached to the tax rate for your internal use only. It will not be visible to your customers.
+        /// An arbitrary string attached to the tax rate for your internal use only. It will not be visible to your customers.
         /// </summary>
         [Input("description")]
         public Input<string>? Description { get; set; }
 
         /// <summary>
-        /// String. The display name of the tax rate, which will be shown to users.
+        /// The display name of the tax rate, which will be shown to users.
         /// </summary>
         [Input("displayName", required: true)]
         public Input<string> DisplayName { get; set; } = null!;
 
         /// <summary>
-        /// Bool. This specifies if the tax rate is inclusive or exclusive.
-        /// * `percentage ` - (Required) Float. This represents the tax rate percent out of 100.
+        /// This specifies if the tax rate is inclusive or exclusive.
         /// </summary>
         [Input("inclusive", required: true)]
         public Input<bool> Inclusive { get; set; } = null!;
 
         /// <summary>
-        /// String. The jurisdiction for the tax rate. You can use this label field for tax reporting purposes. It also appears on your customer’s invoice.
+        /// The jurisdiction for the tax rate. You can use this label field for tax reporting purposes.It also appears on your
+        /// customer’s invoice.
         /// </summary>
         [Input("jurisdiction")]
         public Input<string>? Jurisdiction { get; set; }
@@ -210,7 +182,9 @@ namespace Pulumi.Stripe
         private InputMap<string>? _metadata;
 
         /// <summary>
-        /// Map(String). Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the object in a structured format. Individual keys can be unset by posting an empty value to them. All keys can be unset by posting an empty value to metadata.
+        /// Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the
+        /// object in a structured format. Individual keys can be unset by posting an empty value to them. All keys can be unset by
+        /// posting an empty value to metadata.
         /// </summary>
         public InputMap<string> Metadata
         {
@@ -225,13 +199,13 @@ namespace Pulumi.Stripe
         public Input<double> Percentage { get; set; } = null!;
 
         /// <summary>
-        /// String. ISO 3166-2 subdivision code, without country prefix. For example, “NY” for New York, United States.
+        /// ISO 3166-2 subdivision code, without country prefix. For example, “NY” for New York, United States.
         /// </summary>
         [Input("state")]
         public Input<string>? State { get; set; }
 
         /// <summary>
-        /// String. The high-level tax type, such as vat or sales_tax.
+        /// The high-level tax type, such as vat or sales_tax.
         /// </summary>
         [Input("taxType")]
         public Input<string>? TaxType { get; set; }
@@ -245,50 +219,51 @@ namespace Pulumi.Stripe
     public sealed class TaxRateState : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Bool. Flag determining whether the tax rate is active or inactive (archived). Inactive tax rates cannot be used with new applications or Checkout Sessions, but will still work for subscriptions and invoices that already have it set.
+        /// Flag determining whether the tax rate is active or inactive (archived). Inactive tax rates cannot be used with new
+        /// applications or Checkout Sessions, but will still work for subscriptions and invoices that already have it set.
         /// </summary>
         [Input("active")]
         public Input<bool>? Active { get; set; }
 
         /// <summary>
-        /// String. Two-letter country code (ISO 3166-1 alpha-2).
+        /// Two-letter country code (ISO 3166-1 alpha-2).
         /// </summary>
         [Input("country")]
         public Input<string>? Country { get; set; }
 
         /// <summary>
-        /// Int. Time at which the object was created. Measured in seconds since the Unix epoch.
+        /// Time at which the object was created. Measured in seconds since the Unix epoch.
         /// </summary>
         [Input("created")]
         public Input<int>? Created { get; set; }
 
         /// <summary>
-        /// String. An arbitrary string attached to the tax rate for your internal use only. It will not be visible to your customers.
+        /// An arbitrary string attached to the tax rate for your internal use only. It will not be visible to your customers.
         /// </summary>
         [Input("description")]
         public Input<string>? Description { get; set; }
 
         /// <summary>
-        /// String. The display name of the tax rate, which will be shown to users.
+        /// The display name of the tax rate, which will be shown to users.
         /// </summary>
         [Input("displayName")]
         public Input<string>? DisplayName { get; set; }
 
         /// <summary>
-        /// Bool. This specifies if the tax rate is inclusive or exclusive.
-        /// * `percentage ` - (Required) Float. This represents the tax rate percent out of 100.
+        /// This specifies if the tax rate is inclusive or exclusive.
         /// </summary>
         [Input("inclusive")]
         public Input<bool>? Inclusive { get; set; }
 
         /// <summary>
-        /// String. The jurisdiction for the tax rate. You can use this label field for tax reporting purposes. It also appears on your customer’s invoice.
+        /// The jurisdiction for the tax rate. You can use this label field for tax reporting purposes.It also appears on your
+        /// customer’s invoice.
         /// </summary>
         [Input("jurisdiction")]
         public Input<string>? Jurisdiction { get; set; }
 
         /// <summary>
-        /// Bool. Has the value true if the object exists in live mode or the value false if the object exists in test mode.
+        /// Has the value true if the object exists in live mode or the value false if the object exists in test mode.
         /// </summary>
         [Input("livemode")]
         public Input<bool>? Livemode { get; set; }
@@ -297,7 +272,9 @@ namespace Pulumi.Stripe
         private InputMap<string>? _metadata;
 
         /// <summary>
-        /// Map(String). Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the object in a structured format. Individual keys can be unset by posting an empty value to them. All keys can be unset by posting an empty value to metadata.
+        /// Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the
+        /// object in a structured format. Individual keys can be unset by posting an empty value to them. All keys can be unset by
+        /// posting an empty value to metadata.
         /// </summary>
         public InputMap<string> Metadata
         {
@@ -306,7 +283,7 @@ namespace Pulumi.Stripe
         }
 
         /// <summary>
-        /// String. String representing the object’s type. Objects of the same type share the same value.
+        /// String representing the object’s type. Objects of the same type share the same value.
         /// </summary>
         [Input("object")]
         public Input<string>? Object { get; set; }
@@ -318,13 +295,13 @@ namespace Pulumi.Stripe
         public Input<double>? Percentage { get; set; }
 
         /// <summary>
-        /// String. ISO 3166-2 subdivision code, without country prefix. For example, “NY” for New York, United States.
+        /// ISO 3166-2 subdivision code, without country prefix. For example, “NY” for New York, United States.
         /// </summary>
         [Input("state")]
         public Input<string>? State { get; set; }
 
         /// <summary>
-        /// String. The high-level tax type, such as vat or sales_tax.
+        /// The high-level tax type, such as vat or sales_tax.
         /// </summary>
         [Input("taxType")]
         public Input<string>? TaxType { get; set; }

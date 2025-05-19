@@ -13,19 +13,19 @@ namespace Pulumi.Stripe.Inputs
     public sealed class PortalConfigurationBusinessProfileGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// String. The messaging shown to customers in the portal.
+        /// The messaging shown to customers in the portal.
         /// </summary>
         [Input("headline")]
         public Input<string>? Headline { get; set; }
 
         /// <summary>
-        /// String. A link to the business's publicly available privacy policy.
+        /// A link to the business's publicly available privacy policy.
         /// </summary>
         [Input("privacyPolicyUrl")]
         public Input<string>? PrivacyPolicyUrl { get; set; }
 
         /// <summary>
-        /// String. A link to the business's publicly available terms of service.
+        /// A link to the business's publicly available terms of service.
         /// </summary>
         [Input("termsOfServiceUrl")]
         public Input<string>? TermsOfServiceUrl { get; set; }

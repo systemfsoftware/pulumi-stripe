@@ -56,6 +56,31 @@ export interface FileLinkData {
     metadata?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
 }
 
+export interface MeterCustomerMapping {
+    /**
+     * The key in the usage event payload to use for mapping the event to a customer.
+     */
+    eventPayloadKey: pulumi.Input<string>;
+    /**
+     * The method for mapping a meter event to a customer. Must be by_id
+     */
+    type: pulumi.Input<string>;
+}
+
+export interface MeterDefaultAggregation {
+    /**
+     * Specifies how events are aggregated. Allowed values are count to count the number of events and sum to sum each event’s value.
+     */
+    formula: pulumi.Input<string>;
+}
+
+export interface MeterValueSettings {
+    /**
+     * The key in the usage event payload to use as the value for this meter. For example, if the event payload  contains usage on a bytesUsed field, then set the eventPayloadKey to “bytes_used”
+     */
+    eventPayloadKey: pulumi.Input<string>;
+}
+
 export interface PortalConfigurationBusinessProfile {
     /**
      * The messaging shown to customers in the portal.
@@ -88,10 +113,6 @@ export interface PortalConfigurationFeatures {
      * Information about canceling subscriptions in the portal.
      */
     subscriptionCancel?: pulumi.Input<inputs.PortalConfigurationFeaturesSubscriptionCancel>;
-    /**
-     * Information about pausing subscriptions in the portal.
-     */
-    subscriptionPauses?: pulumi.Input<pulumi.Input<inputs.PortalConfigurationFeaturesSubscriptionPause>[]>;
     /**
      * Information about updating subscriptions in the portal.
      */
@@ -151,13 +172,6 @@ export interface PortalConfigurationFeaturesSubscriptionCancelCancellationReason
      * Which cancellation reasons will be given as options to the customer.
      */
     options: pulumi.Input<pulumi.Input<string>[]>;
-}
-
-export interface PortalConfigurationFeaturesSubscriptionPause {
-    /**
-     * Whether the feature is enabled.
-     */
-    enabled?: pulumi.Input<boolean>;
 }
 
 export interface PortalConfigurationFeaturesSubscriptionUpdate {
@@ -270,6 +284,25 @@ export interface PriceCurrencyOptionTier {
     upTo?: pulumi.Input<number>;
 }
 
+export interface PriceCustomUnitAmount {
+    /**
+     * Pass in true to enable custom_unit_amount, otherwise omit custom_unit_amount
+     */
+    enabled: pulumi.Input<boolean>;
+    /**
+     * The maximum unit amount the customer can specify for this item.
+     */
+    maximum?: pulumi.Input<number>;
+    /**
+     * The minimum unit amount the customer can specify for this item. Must be at least the minimum charge amount.
+     */
+    minimum?: pulumi.Input<number>;
+    /**
+     * The starting unit amount which can be updated by the customer.
+     */
+    preset?: pulumi.Input<number>;
+}
+
 export interface PriceRecurring {
     /**
      * Specifies a usage aggregation strategy for prices of usage_type=metered. Allowed values are sum for summing up all usage during a period, lastDuringPeriod for using the last usage record reported within a period, lastEver for using the last usage record ever (across period bounds) or max which uses the usage record with the maximum reported usage during a period.
@@ -283,6 +316,10 @@ export interface PriceRecurring {
      * The number of intervals between subscription billings. For example, interval=month and interval_count=3 bills every 3 months. Maximum of one year interval allowed (1 year, 12 months, or 52 weeks).
      */
     intervalCount?: pulumi.Input<number>;
+    /**
+     * The meter tracking the usage of a metered price
+     */
+    meter?: pulumi.Input<string>;
     /**
      * Configures how the quantity per period should be determined. Can be either metered or licensed. licensed automatically bills the quantity set when adding it to a subscription. metered aggregates the total usage based on usage records. Defaults to licensed.
      */
@@ -331,11 +368,11 @@ export interface PromotionCodeRestrictions {
     /**
      * Minimum amount required to redeem this Promotion Code into a Coupon (e.g., a purchase must be $100 or more to work).
      */
-    minimumAmount: pulumi.Input<number>;
+    minimumAmount?: pulumi.Input<number>;
     /**
      * Three-letter ISO code for minimum_amount
      */
-    minimumAmountCurrency: pulumi.Input<string>;
+    minimumAmountCurrency?: pulumi.Input<string>;
 }
 
 export interface ShippingRateDeliveryEstimate {

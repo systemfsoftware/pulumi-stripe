@@ -14,15 +14,15 @@ namespace Pulumi.Stripe.Outputs
     public sealed class PortalConfigurationBusinessProfile
     {
         /// <summary>
-        /// String. The messaging shown to customers in the portal.
+        /// The messaging shown to customers in the portal.
         /// </summary>
         public readonly string? Headline;
         /// <summary>
-        /// String. A link to the business's publicly available privacy policy.
+        /// A link to the business's publicly available privacy policy.
         /// </summary>
         public readonly string? PrivacyPolicyUrl;
         /// <summary>
-        /// String. A link to the business's publicly available terms of service.
+        /// A link to the business's publicly available terms of service.
         /// </summary>
         public readonly string? TermsOfServiceUrl;
 

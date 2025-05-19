@@ -13,13 +13,13 @@ namespace Pulumi.Stripe.Inputs
     public sealed class ShippingRateFixedAmountGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Int. A non-negative integer in cents representing how much to charge.
+        /// A non-negative integer in cents representing how much to charge.
         /// </summary>
         [Input("amount", required: true)]
         public Input<int> Amount { get; set; } = null!;
 
         /// <summary>
-        /// String. Three-letter ISO currency code, in lowercase - [supported currencies](https://stripe.com/docs/currencies).
+        /// Three-letter ISO currency code, in lowercase. Must be a supported currency.
         /// </summary>
         [Input("currency", required: true)]
         public Input<string> Currency { get; set; } = null!;
@@ -28,7 +28,7 @@ namespace Pulumi.Stripe.Inputs
         private InputList<Inputs.ShippingRateFixedAmountCurrencyOptionGetArgs>? _currencyOptions;
 
         /// <summary>
-        /// List(Resource). Please see argument details Currency Option
+        /// Shipping rates defined in each available currency option. Each key must be a three-letter ISO currency code and a supported currency. For example, to get your shipping rate in eur, fetch the value of the eur key in currency_options. This field is not included by default. To include it in the response, expand the currency_options field.
         /// </summary>
         public InputList<Inputs.ShippingRateFixedAmountCurrencyOptionGetArgs> CurrencyOptions
         {

@@ -9,58 +9,50 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Stripe
 {
-    /// <summary>
-    /// With this resource, you can create a Customer Portal Configuration - [Stripe API portal configuration documentation](https://stripe.com/docs/api/customer_portal/configuration).
-    /// 
-    /// The Billing customer portal is a Stripe-hosted UI for subscription and billing management.
-    /// 
-    /// A portal configuration describes the functionality and features that you want to provide to your customers through the portal.
-    /// 
-    /// &gt; Removal of the Customer Portal isn't supported through the Stripe SDK. The best practice, which this provider follows,
-    /// is to deactivate the Customer Portal by marking it as inactive on destroy, which indicates that resource is no longer
-    /// available.
-    /// </summary>
     [StripeResourceType("stripe:index/portalConfiguration:PortalConfiguration")]
     public partial class PortalConfiguration : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// Bool. Whether the configuration is active and can be used to create portal sessions. (On create it is always set as `true`)
+        /// Whether the configuration is active and can be used to create portal sessions.
         /// </summary>
         [Output("active")]
         public Output<bool?> Active { get; private set; } = null!;
 
         /// <summary>
-        /// List(Resource). The business information shown to customers in the portal. More details in Business Profile section
+        /// The business information shown to customers in the portal.
         /// </summary>
         [Output("businessProfile")]
         public Output<Outputs.PortalConfigurationBusinessProfile> BusinessProfile { get; private set; } = null!;
 
         /// <summary>
-        /// String. The default URL to redirect customers to when they click on the portal’s link to return to your website. This can be overriden when creating the session.
+        /// The default URL to redirect customers to when they click on the portal's link to return to your website. This can be
+        /// overriden when creating the session.
         /// </summary>
         [Output("defaultReturnUrl")]
         public Output<string?> DefaultReturnUrl { get; private set; } = null!;
 
         /// <summary>
-        /// List(Resource). Information about the features available in the portal. Feature section described in Feature section
+        /// Information about the features available in the portal.
         /// </summary>
         [Output("features")]
         public Output<Outputs.PortalConfigurationFeatures> Features { get; private set; } = null!;
 
         /// <summary>
-        /// Bool. Whether the configuration is the default.
+        /// Whether the configuration is the default. If true, this configuration can be managed in the Dashboard and portal
+        /// sessions will use this configuration unless it is overriden when creating the session.
         /// </summary>
         [Output("isDefault")]
         public Output<bool> IsDefault { get; private set; } = null!;
 
         /// <summary>
-        /// List(Resource). The hosted login page for this configuration. See details in Login Page Section.
+        /// The hosted login page for this configuration.
         /// </summary>
         [Output("loginPage")]
         public Output<Outputs.PortalConfigurationLoginPage> LoginPage { get; private set; } = null!;
 
         /// <summary>
-        /// Map(String). Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
+        /// Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the
+        /// object in a structured format.
         /// </summary>
         [Output("metadata")]
         public Output<ImmutableDictionary<string, string>?> Metadata { get; private set; } = null!;
@@ -112,31 +104,32 @@ namespace Pulumi.Stripe
     public sealed class PortalConfigurationArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Bool. Whether the configuration is active and can be used to create portal sessions. (On create it is always set as `true`)
+        /// Whether the configuration is active and can be used to create portal sessions.
         /// </summary>
         [Input("active")]
         public Input<bool>? Active { get; set; }
 
         /// <summary>
-        /// List(Resource). The business information shown to customers in the portal. More details in Business Profile section
+        /// The business information shown to customers in the portal.
         /// </summary>
         [Input("businessProfile", required: true)]
         public Input<Inputs.PortalConfigurationBusinessProfileArgs> BusinessProfile { get; set; } = null!;
 
         /// <summary>
-        /// String. The default URL to redirect customers to when they click on the portal’s link to return to your website. This can be overriden when creating the session.
+        /// The default URL to redirect customers to when they click on the portal's link to return to your website. This can be
+        /// overriden when creating the session.
         /// </summary>
         [Input("defaultReturnUrl")]
         public Input<string>? DefaultReturnUrl { get; set; }
 
         /// <summary>
-        /// List(Resource). Information about the features available in the portal. Feature section described in Feature section
+        /// Information about the features available in the portal.
         /// </summary>
         [Input("features", required: true)]
         public Input<Inputs.PortalConfigurationFeaturesArgs> Features { get; set; } = null!;
 
         /// <summary>
-        /// List(Resource). The hosted login page for this configuration. See details in Login Page Section.
+        /// The hosted login page for this configuration.
         /// </summary>
         [Input("loginPage")]
         public Input<Inputs.PortalConfigurationLoginPageArgs>? LoginPage { get; set; }
@@ -145,7 +138,8 @@ namespace Pulumi.Stripe
         private InputMap<string>? _metadata;
 
         /// <summary>
-        /// Map(String). Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
+        /// Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the
+        /// object in a structured format.
         /// </summary>
         public InputMap<string> Metadata
         {
@@ -162,37 +156,39 @@ namespace Pulumi.Stripe
     public sealed class PortalConfigurationState : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Bool. Whether the configuration is active and can be used to create portal sessions. (On create it is always set as `true`)
+        /// Whether the configuration is active and can be used to create portal sessions.
         /// </summary>
         [Input("active")]
         public Input<bool>? Active { get; set; }
 
         /// <summary>
-        /// List(Resource). The business information shown to customers in the portal. More details in Business Profile section
+        /// The business information shown to customers in the portal.
         /// </summary>
         [Input("businessProfile")]
         public Input<Inputs.PortalConfigurationBusinessProfileGetArgs>? BusinessProfile { get; set; }
 
         /// <summary>
-        /// String. The default URL to redirect customers to when they click on the portal’s link to return to your website. This can be overriden when creating the session.
+        /// The default URL to redirect customers to when they click on the portal's link to return to your website. This can be
+        /// overriden when creating the session.
         /// </summary>
         [Input("defaultReturnUrl")]
         public Input<string>? DefaultReturnUrl { get; set; }
 
         /// <summary>
-        /// List(Resource). Information about the features available in the portal. Feature section described in Feature section
+        /// Information about the features available in the portal.
         /// </summary>
         [Input("features")]
         public Input<Inputs.PortalConfigurationFeaturesGetArgs>? Features { get; set; }
 
         /// <summary>
-        /// Bool. Whether the configuration is the default.
+        /// Whether the configuration is the default. If true, this configuration can be managed in the Dashboard and portal
+        /// sessions will use this configuration unless it is overriden when creating the session.
         /// </summary>
         [Input("isDefault")]
         public Input<bool>? IsDefault { get; set; }
 
         /// <summary>
-        /// List(Resource). The hosted login page for this configuration. See details in Login Page Section.
+        /// The hosted login page for this configuration.
         /// </summary>
         [Input("loginPage")]
         public Input<Inputs.PortalConfigurationLoginPageGetArgs>? LoginPage { get; set; }
@@ -201,7 +197,8 @@ namespace Pulumi.Stripe
         private InputMap<string>? _metadata;
 
         /// <summary>
-        /// Map(String). Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
+        /// Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the
+        /// object in a structured format.
         /// </summary>
         public InputMap<string> Metadata
         {

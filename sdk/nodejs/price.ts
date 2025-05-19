@@ -56,6 +56,11 @@ export class Price extends pulumi.CustomResource {
      */
     public readonly currencyOptions!: pulumi.Output<outputs.PriceCurrencyOption[] | undefined>;
     /**
+     * When set, provides configuration for the amount to be adjusted by the customer during Checkout Sessions and Payment
+     * Links
+     */
+    public readonly customUnitAmount!: pulumi.Output<outputs.PriceCustomUnitAmount | undefined>;
+    /**
      * A lookup key used to retrieve prices dynamically from a static string.
      */
     public readonly lookupKey!: pulumi.Output<string | undefined>;
@@ -80,7 +85,7 @@ export class Price extends pulumi.CustomResource {
      * Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of inclusive, exclusive, or
      * unspecified. Once specified as either inclusive or exclusive, it cannot be changed.
      */
-    public readonly taxBehaviour!: pulumi.Output<string | undefined>;
+    public readonly taxBehavior!: pulumi.Output<string | undefined>;
     /**
      * Each element represents a pricing tier. This parameter requires billingScheme to be set to tiered. See also the
      * documentation for billing_scheme.
@@ -132,12 +137,13 @@ export class Price extends pulumi.CustomResource {
             resourceInputs["billingScheme"] = state ? state.billingScheme : undefined;
             resourceInputs["currency"] = state ? state.currency : undefined;
             resourceInputs["currencyOptions"] = state ? state.currencyOptions : undefined;
+            resourceInputs["customUnitAmount"] = state ? state.customUnitAmount : undefined;
             resourceInputs["lookupKey"] = state ? state.lookupKey : undefined;
             resourceInputs["metadata"] = state ? state.metadata : undefined;
             resourceInputs["nickname"] = state ? state.nickname : undefined;
             resourceInputs["product"] = state ? state.product : undefined;
             resourceInputs["recurring"] = state ? state.recurring : undefined;
-            resourceInputs["taxBehaviour"] = state ? state.taxBehaviour : undefined;
+            resourceInputs["taxBehavior"] = state ? state.taxBehavior : undefined;
             resourceInputs["tiers"] = state ? state.tiers : undefined;
             resourceInputs["tiersMode"] = state ? state.tiersMode : undefined;
             resourceInputs["transferLookupKey"] = state ? state.transferLookupKey : undefined;
@@ -157,12 +163,13 @@ export class Price extends pulumi.CustomResource {
             resourceInputs["billingScheme"] = args ? args.billingScheme : undefined;
             resourceInputs["currency"] = args ? args.currency : undefined;
             resourceInputs["currencyOptions"] = args ? args.currencyOptions : undefined;
+            resourceInputs["customUnitAmount"] = args ? args.customUnitAmount : undefined;
             resourceInputs["lookupKey"] = args ? args.lookupKey : undefined;
             resourceInputs["metadata"] = args ? args.metadata : undefined;
             resourceInputs["nickname"] = args ? args.nickname : undefined;
             resourceInputs["product"] = args ? args.product : undefined;
             resourceInputs["recurring"] = args ? args.recurring : undefined;
-            resourceInputs["taxBehaviour"] = args ? args.taxBehaviour : undefined;
+            resourceInputs["taxBehavior"] = args ? args.taxBehavior : undefined;
             resourceInputs["tiers"] = args ? args.tiers : undefined;
             resourceInputs["tiersMode"] = args ? args.tiersMode : undefined;
             resourceInputs["transferLookupKey"] = args ? args.transferLookupKey : undefined;
@@ -201,6 +208,11 @@ export interface PriceState {
      */
     currencyOptions?: pulumi.Input<pulumi.Input<inputs.PriceCurrencyOption>[]>;
     /**
+     * When set, provides configuration for the amount to be adjusted by the customer during Checkout Sessions and Payment
+     * Links
+     */
+    customUnitAmount?: pulumi.Input<inputs.PriceCustomUnitAmount>;
+    /**
      * A lookup key used to retrieve prices dynamically from a static string.
      */
     lookupKey?: pulumi.Input<string>;
@@ -225,7 +237,7 @@ export interface PriceState {
      * Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of inclusive, exclusive, or
      * unspecified. Once specified as either inclusive or exclusive, it cannot be changed.
      */
-    taxBehaviour?: pulumi.Input<string>;
+    taxBehavior?: pulumi.Input<string>;
     /**
      * Each element represents a pricing tier. This parameter requires billingScheme to be set to tiered. See also the
      * documentation for billing_scheme.
@@ -286,6 +298,11 @@ export interface PriceArgs {
      */
     currencyOptions?: pulumi.Input<pulumi.Input<inputs.PriceCurrencyOption>[]>;
     /**
+     * When set, provides configuration for the amount to be adjusted by the customer during Checkout Sessions and Payment
+     * Links
+     */
+    customUnitAmount?: pulumi.Input<inputs.PriceCustomUnitAmount>;
+    /**
      * A lookup key used to retrieve prices dynamically from a static string.
      */
     lookupKey?: pulumi.Input<string>;
@@ -310,7 +327,7 @@ export interface PriceArgs {
      * Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of inclusive, exclusive, or
      * unspecified. Once specified as either inclusive or exclusive, it cannot be changed.
      */
-    taxBehaviour?: pulumi.Input<string>;
+    taxBehavior?: pulumi.Input<string>;
     /**
      * Each element represents a pricing tier. This parameter requires billingScheme to be set to tiered. See also the
      * documentation for billing_scheme.

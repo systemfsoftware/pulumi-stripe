@@ -134,6 +134,47 @@
                 "create"
             ]
         },
+        "stripe:index/MeterCustomerMapping:MeterCustomerMapping": {
+            "properties": {
+                "eventPayloadKey": {
+                    "type": "string",
+                    "description": "The key in the usage event payload to use for mapping the event to a customer.\n"
+                },
+                "type": {
+                    "type": "string",
+                    "description": "The method for mapping a meter event to a customer. Must be by_id\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "eventPayloadKey",
+                "type"
+            ]
+        },
+        "stripe:index/MeterDefaultAggregation:MeterDefaultAggregation": {
+            "properties": {
+                "formula": {
+                    "type": "string",
+                    "description": "Specifies how events are aggregated. Allowed values are count to count the number of events and sum to sum each event’s value.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "formula"
+            ]
+        },
+        "stripe:index/MeterValueSettings:MeterValueSettings": {
+            "properties": {
+                "eventPayloadKey": {
+                    "type": "string",
+                    "description": "The key in the usage event payload to use as the value for this meter. For example, if the event payload  contains usage on a bytes_used field, then set the event_payload_key to “bytes_used”\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "eventPayloadKey"
+            ]
+        },
         "stripe:index/PortalConfigurationBusinessProfile:PortalConfigurationBusinessProfile": {
             "properties": {
                 "headline": {
@@ -169,13 +210,6 @@
                     "$ref": "#/types/stripe:index/PortalConfigurationFeaturesSubscriptionCancel:PortalConfigurationFeaturesSubscriptionCancel",
                     "description": "Information about canceling subscriptions in the portal.\n"
                 },
-                "subscriptionPauses": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/types/stripe:index/PortalConfigurationFeaturesSubscriptionPause:PortalConfigurationFeaturesSubscriptionPause"
-                    },
-                    "description": "Information about pausing subscriptions in the portal.\n"
-                },
                 "subscriptionUpdates": {
                     "type": "array",
                     "items": {
@@ -192,7 +226,6 @@
                         "invoiceHistory",
                         "paymentMethodUpdate",
                         "subscriptionCancel",
-                        "subscriptionPauses",
                         "subscriptionUpdates"
                     ]
                 }
@@ -284,15 +317,6 @@
                 "enabled",
                 "options"
             ]
-        },
-        "stripe:index/PortalConfigurationFeaturesSubscriptionPause:PortalConfigurationFeaturesSubscriptionPause": {
-            "properties": {
-                "enabled": {
-                    "type": "boolean",
-                    "description": "Whether the feature is enabled.\n"
-                }
-            },
-            "type": "object"
         },
         "stripe:index/PortalConfigurationFeaturesSubscriptionUpdate:PortalConfigurationFeaturesSubscriptionUpdate": {
             "properties": {
@@ -450,6 +474,34 @@
             },
             "type": "object"
         },
+        "stripe:index/PriceCustomUnitAmount:PriceCustomUnitAmount": {
+            "properties": {
+                "enabled": {
+                    "type": "boolean",
+                    "description": "Pass in true to enable custom_unit_amount, otherwise omit custom_unit_amount\n",
+                    "willReplaceOnChanges": true
+                },
+                "maximum": {
+                    "type": "integer",
+                    "description": "The maximum unit amount the customer can specify for this item.\n",
+                    "willReplaceOnChanges": true
+                },
+                "minimum": {
+                    "type": "integer",
+                    "description": "The minimum unit amount the customer can specify for this item. Must be at least the minimum charge amount.\n",
+                    "willReplaceOnChanges": true
+                },
+                "preset": {
+                    "type": "integer",
+                    "description": "The starting unit amount which can be updated by the customer.\n",
+                    "willReplaceOnChanges": true
+                }
+            },
+            "type": "object",
+            "required": [
+                "enabled"
+            ]
+        },
         "stripe:index/PriceRecurring:PriceRecurring": {
             "properties": {
                 "aggregateUsage": {
@@ -463,6 +515,10 @@
                 "intervalCount": {
                     "type": "integer",
                     "description": "The number of intervals between subscription billings. For example, interval=month and interval_count=3 bills every 3 months. Maximum of one year interval allowed (1 year, 12 months, or 52 weeks).\n"
+                },
+                "meter": {
+                    "type": "string",
+                    "description": "The meter tracking the usage of a metered price\n"
                 },
                 "usageType": {
                     "type": "string",
@@ -478,26 +534,42 @@
             "properties": {
                 "flatAmount": {
                     "type": "integer",
-                    "description": "The flat billing amount for an entire tier, regardless of the number of units in the tier.\n"
+                    "description": "The flat billing amount for an entire tier, regardless of the number of units in the tier.\n",
+                    "willReplaceOnChanges": true
                 },
                 "flatAmountDecimal": {
                     "type": "number",
-                    "description": "Same as flat_amount, but accepts a decimal value representing an integer in the minor units of the currency. Only one of flat_amount and flat_amount_decimal can be set.\n"
+                    "description": "Same as flat_amount, but accepts a decimal value representing an integer in the minor units of the currency. Only one of flat_amount and flat_amount_decimal can be set.\n",
+                    "willReplaceOnChanges": true
                 },
                 "unitAmount": {
                     "type": "integer",
-                    "description": "The per unit billing amount for each individual unit for which this tier applies.\n"
+                    "description": "The per unit billing amount for each individual unit for which this tier applies.\n",
+                    "willReplaceOnChanges": true
                 },
                 "unitAmountDecimal": {
                     "type": "number",
-                    "description": "Same as unit_amount, but accepts a decimal value in cents with at most 12 decimal places. Only one of unit_amount and unit_amount_decimal can be set.\n"
+                    "description": "Same as unit_amount, but accepts a decimal value in cents with at most 12 decimal places. Only one of unit_amount and unit_amount_decimal can be set.\n",
+                    "willReplaceOnChanges": true
                 },
                 "upTo": {
                     "type": "integer",
-                    "description": "Specifies the upper bound of this tier. The lower bound of a tier is the upper bound of the previous tier adding one. Use -1 to define a fallback tier.\n"
+                    "description": "Specifies the upper bound of this tier. The lower bound of a tier is the upper bound of the previous tier adding one. Use -1 to define a fallback tier.\n",
+                    "willReplaceOnChanges": true
                 }
             },
-            "type": "object"
+            "type": "object",
+            "language": {
+                "nodejs": {
+                    "requiredOutputs": [
+                        "flatAmount",
+                        "flatAmountDecimal",
+                        "unitAmount",
+                        "unitAmountDecimal",
+                        "upTo"
+                    ]
+                }
+            }
         },
         "stripe:index/PriceTransformQuantity:PriceTransformQuantity": {
             "properties": {
@@ -533,9 +605,7 @@
             },
             "type": "object",
             "required": [
-                "firstTimeTransaction",
-                "minimumAmount",
-                "minimumAmountCurrency"
+                "firstTimeTransaction"
             ]
         },
         "stripe:index/ShippingRateDeliveryEstimate:ShippingRateDeliveryEstimate": {
@@ -1339,6 +1409,97 @@
                 "type": "object"
             }
         },
+        "stripe:index/entitlementsFeature:EntitlementsFeature": {
+            "properties": {
+                "active": {
+                    "type": "boolean",
+                    "description": "Inactive features cannot be attached to new products and will not be returned from the features list endpoint.\n"
+                },
+                "livemode": {
+                    "type": "boolean",
+                    "description": "Has the value true if the object exists in live mode or the value false if the object exists in test mode\n"
+                },
+                "lookupKey": {
+                    "type": "string",
+                    "description": "A unique key you provide as your own system identifier. This may be up to 80 characters.\n"
+                },
+                "metadata": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "description": "Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the\nobject in a structured format.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The feature’s name, for your own purpose, not meant to be displayable to the customer.\n"
+                },
+                "object": {
+                    "type": "string",
+                    "description": "String representing the object’s type. Objects of the same type share the same value.\n"
+                }
+            },
+            "required": [
+                "active",
+                "livemode",
+                "lookupKey",
+                "name",
+                "object"
+            ],
+            "inputProperties": {
+                "lookupKey": {
+                    "type": "string",
+                    "description": "A unique key you provide as your own system identifier. This may be up to 80 characters.\n"
+                },
+                "metadata": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "description": "Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the\nobject in a structured format.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The feature’s name, for your own purpose, not meant to be displayable to the customer.\n"
+                }
+            },
+            "requiredInputs": [
+                "lookupKey"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering EntitlementsFeature resources.\n",
+                "properties": {
+                    "active": {
+                        "type": "boolean",
+                        "description": "Inactive features cannot be attached to new products and will not be returned from the features list endpoint.\n"
+                    },
+                    "livemode": {
+                        "type": "boolean",
+                        "description": "Has the value true if the object exists in live mode or the value false if the object exists in test mode\n"
+                    },
+                    "lookupKey": {
+                        "type": "string",
+                        "description": "A unique key you provide as your own system identifier. This may be up to 80 characters.\n"
+                    },
+                    "metadata": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string"
+                        },
+                        "description": "Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the\nobject in a structured format.\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "The feature’s name, for your own purpose, not meant to be displayable to the customer.\n"
+                    },
+                    "object": {
+                        "type": "string",
+                        "description": "String representing the object’s type. Objects of the same type share the same value.\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
         "stripe:index/file:File": {
             "properties": {
                 "base64content": {
@@ -1485,6 +1646,110 @@
                 "type": "object"
             }
         },
+        "stripe:index/meter:Meter": {
+            "properties": {
+                "customerMapping": {
+                    "$ref": "#/types/stripe:index/MeterCustomerMapping:MeterCustomerMapping",
+                    "description": "Fields that specify how to map a meter event to a customer.\n"
+                },
+                "defaultAggregation": {
+                    "$ref": "#/types/stripe:index/MeterDefaultAggregation:MeterDefaultAggregation",
+                    "description": "The default settings to aggregate a meter’s events with\n"
+                },
+                "displayName": {
+                    "type": "string",
+                    "description": "The meter’s name.\n"
+                },
+                "eventName": {
+                    "type": "string",
+                    "description": "The name of the meter event to record usage for. Corresponds with the event_name field on meter events\n"
+                },
+                "eventTimeWindow": {
+                    "type": "string",
+                    "description": "The time window to pre-aggregate meter events for, if any.\n"
+                },
+                "valueSettings": {
+                    "$ref": "#/types/stripe:index/MeterValueSettings:MeterValueSettings",
+                    "description": "Fields that specify how to calculate a meter event’s value.\n"
+                }
+            },
+            "required": [
+                "defaultAggregation",
+                "displayName",
+                "eventName"
+            ],
+            "inputProperties": {
+                "customerMapping": {
+                    "$ref": "#/types/stripe:index/MeterCustomerMapping:MeterCustomerMapping",
+                    "description": "Fields that specify how to map a meter event to a customer.\n",
+                    "willReplaceOnChanges": true
+                },
+                "defaultAggregation": {
+                    "$ref": "#/types/stripe:index/MeterDefaultAggregation:MeterDefaultAggregation",
+                    "description": "The default settings to aggregate a meter’s events with\n",
+                    "willReplaceOnChanges": true
+                },
+                "displayName": {
+                    "type": "string",
+                    "description": "The meter’s name.\n"
+                },
+                "eventName": {
+                    "type": "string",
+                    "description": "The name of the meter event to record usage for. Corresponds with the event_name field on meter events\n",
+                    "willReplaceOnChanges": true
+                },
+                "eventTimeWindow": {
+                    "type": "string",
+                    "description": "The time window to pre-aggregate meter events for, if any.\n",
+                    "willReplaceOnChanges": true
+                },
+                "valueSettings": {
+                    "$ref": "#/types/stripe:index/MeterValueSettings:MeterValueSettings",
+                    "description": "Fields that specify how to calculate a meter event’s value.\n",
+                    "willReplaceOnChanges": true
+                }
+            },
+            "requiredInputs": [
+                "defaultAggregation",
+                "displayName",
+                "eventName"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering Meter resources.\n",
+                "properties": {
+                    "customerMapping": {
+                        "$ref": "#/types/stripe:index/MeterCustomerMapping:MeterCustomerMapping",
+                        "description": "Fields that specify how to map a meter event to a customer.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "defaultAggregation": {
+                        "$ref": "#/types/stripe:index/MeterDefaultAggregation:MeterDefaultAggregation",
+                        "description": "The default settings to aggregate a meter’s events with\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "displayName": {
+                        "type": "string",
+                        "description": "The meter’s name.\n"
+                    },
+                    "eventName": {
+                        "type": "string",
+                        "description": "The name of the meter event to record usage for. Corresponds with the event_name field on meter events\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "eventTimeWindow": {
+                        "type": "string",
+                        "description": "The time window to pre-aggregate meter events for, if any.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "valueSettings": {
+                        "$ref": "#/types/stripe:index/MeterValueSettings:MeterValueSettings",
+                        "description": "Fields that specify how to calculate a meter event’s value.\n",
+                        "willReplaceOnChanges": true
+                    }
+                },
+                "type": "object"
+            }
+        },
         "stripe:index/portalConfiguration:PortalConfiguration": {
             "properties": {
                 "active": {
@@ -1617,6 +1882,10 @@
                     },
                     "description": "Prices defined in each available currency option. Each key must be a three-letter ISO currency code and a supported\ncurrency\n"
                 },
+                "customUnitAmount": {
+                    "$ref": "#/types/stripe:index/PriceCustomUnitAmount:PriceCustomUnitAmount",
+                    "description": "When set, provides configuration for the amount to be adjusted by the customer during Checkout Sessions and Payment\nLinks\n"
+                },
                 "lookupKey": {
                     "type": "string",
                     "description": "A lookup key used to retrieve prices dynamically from a static string.\n"
@@ -1640,7 +1909,7 @@
                     "$ref": "#/types/stripe:index/PriceRecurring:PriceRecurring",
                     "description": "The recurring components of a price such as interval and usage_type.\n"
                 },
-                "taxBehaviour": {
+                "taxBehavior": {
                     "type": "string",
                     "description": "Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of inclusive, exclusive, or\nunspecified. Once specified as either inclusive or exclusive, it cannot be changed.\n"
                 },
@@ -1706,6 +1975,11 @@
                     },
                     "description": "Prices defined in each available currency option. Each key must be a three-letter ISO currency code and a supported\ncurrency\n"
                 },
+                "customUnitAmount": {
+                    "$ref": "#/types/stripe:index/PriceCustomUnitAmount:PriceCustomUnitAmount",
+                    "description": "When set, provides configuration for the amount to be adjusted by the customer during Checkout Sessions and Payment\nLinks\n",
+                    "willReplaceOnChanges": true
+                },
                 "lookupKey": {
                     "type": "string",
                     "description": "A lookup key used to retrieve prices dynamically from a static string.\n"
@@ -1731,7 +2005,7 @@
                     "description": "The recurring components of a price such as interval and usage_type.\n",
                     "willReplaceOnChanges": true
                 },
-                "taxBehaviour": {
+                "taxBehavior": {
                     "type": "string",
                     "description": "Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of inclusive, exclusive, or\nunspecified. Once specified as either inclusive or exclusive, it cannot be changed.\n"
                 },
@@ -1796,6 +2070,11 @@
                         },
                         "description": "Prices defined in each available currency option. Each key must be a three-letter ISO currency code and a supported\ncurrency\n"
                     },
+                    "customUnitAmount": {
+                        "$ref": "#/types/stripe:index/PriceCustomUnitAmount:PriceCustomUnitAmount",
+                        "description": "When set, provides configuration for the amount to be adjusted by the customer during Checkout Sessions and Payment\nLinks\n",
+                        "willReplaceOnChanges": true
+                    },
                     "lookupKey": {
                         "type": "string",
                         "description": "A lookup key used to retrieve prices dynamically from a static string.\n"
@@ -1821,7 +2100,7 @@
                         "description": "The recurring components of a price such as interval and usage_type.\n",
                         "willReplaceOnChanges": true
                     },
-                    "taxBehaviour": {
+                    "taxBehavior": {
                         "type": "string",
                         "description": "Specifies whether the price is considered inclusive of taxes or exclusive of taxes. One of inclusive, exclusive, or\nunspecified. Once specified as either inclusive or exclusive, it cannot be changed.\n"
                     },
@@ -1875,19 +2154,19 @@
                     "type": "string",
                     "description": "The product’s description, meant to be displayable to the customer. Use this field to optionally store a long form\nexplanation of the product being sold for your own rendering purposes.\n"
                 },
-                "features": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    },
-                    "description": "A list of up to 15 features for this product. These are displayed in pricing tables.\n"
-                },
                 "images": {
                     "type": "array",
                     "items": {
                         "type": "string"
                     },
                     "description": "A list of up to 8 URLs of images for this product, meant to be displayable to the customer.\n"
+                },
+                "marketingFeatures": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "A list of up to 15 marketing features for this product. These are displayed in pricing tables.\n"
                 },
                 "metadata": {
                     "type": "object",
@@ -1945,19 +2224,19 @@
                     "type": "string",
                     "description": "The product’s description, meant to be displayable to the customer. Use this field to optionally store a long form\nexplanation of the product being sold for your own rendering purposes.\n"
                 },
-                "features": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    },
-                    "description": "A list of up to 15 features for this product. These are displayed in pricing tables.\n"
-                },
                 "images": {
                     "type": "array",
                     "items": {
                         "type": "string"
                     },
                     "description": "A list of up to 8 URLs of images for this product, meant to be displayable to the customer.\n"
+                },
+                "marketingFeatures": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "A list of up to 15 marketing features for this product. These are displayed in pricing tables.\n"
                 },
                 "metadata": {
                     "type": "object",
@@ -2014,19 +2293,19 @@
                         "type": "string",
                         "description": "The product’s description, meant to be displayable to the customer. Use this field to optionally store a long form\nexplanation of the product being sold for your own rendering purposes.\n"
                     },
-                    "features": {
-                        "type": "array",
-                        "items": {
-                            "type": "string"
-                        },
-                        "description": "A list of up to 15 features for this product. These are displayed in pricing tables.\n"
-                    },
                     "images": {
                         "type": "array",
                         "items": {
                             "type": "string"
                         },
                         "description": "A list of up to 8 URLs of images for this product, meant to be displayable to the customer.\n"
+                    },
+                    "marketingFeatures": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "A list of up to 15 marketing features for this product. These are displayed in pricing tables.\n"
                     },
                     "metadata": {
                         "type": "object",
@@ -2070,6 +2349,72 @@
                     "url": {
                         "type": "string",
                         "description": "A URL of a publicly-accessible webpage for this product.\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "stripe:index/productFeature:ProductFeature": {
+            "properties": {
+                "entitlementsFeature": {
+                    "type": "string",
+                    "description": "The ID of the Entitlements Feature the product will be attached to\n"
+                },
+                "livemode": {
+                    "type": "boolean",
+                    "description": "Has the value true if the object exists in live mode or the value false if the object exists in test mode\n"
+                },
+                "object": {
+                    "type": "string",
+                    "description": "String representing the object’s type. Objects of the same type share the same value.\n"
+                },
+                "product": {
+                    "type": "string",
+                    "description": "The ID of the product that this Entitlements Feature will be attached to.\n"
+                }
+            },
+            "required": [
+                "entitlementsFeature",
+                "livemode",
+                "object",
+                "product"
+            ],
+            "inputProperties": {
+                "entitlementsFeature": {
+                    "type": "string",
+                    "description": "The ID of the Entitlements Feature the product will be attached to\n",
+                    "willReplaceOnChanges": true
+                },
+                "product": {
+                    "type": "string",
+                    "description": "The ID of the product that this Entitlements Feature will be attached to.\n",
+                    "willReplaceOnChanges": true
+                }
+            },
+            "requiredInputs": [
+                "entitlementsFeature",
+                "product"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering ProductFeature resources.\n",
+                "properties": {
+                    "entitlementsFeature": {
+                        "type": "string",
+                        "description": "The ID of the Entitlements Feature the product will be attached to\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "livemode": {
+                        "type": "boolean",
+                        "description": "Has the value true if the object exists in live mode or the value false if the object exists in test mode\n"
+                    },
+                    "object": {
+                        "type": "string",
+                        "description": "String representing the object’s type. Objects of the same type share the same value.\n"
+                    },
+                    "product": {
+                        "type": "string",
+                        "description": "The ID of the product that this Entitlements Feature will be attached to.\n",
+                        "willReplaceOnChanges": true
                     }
                 },
                 "type": "object"
@@ -2544,6 +2889,10 @@
                     "type": "string",
                     "description": "Events sent to this endpoint will be generated with this Stripe Version instead of your account’s default Stripe\nVersion.\n"
                 },
+                "application": {
+                    "type": "string",
+                    "description": "The ID of the associated Connect application.\n"
+                },
                 "connect": {
                     "type": "boolean",
                     "description": "Whether this endpoint should receive events from connected accounts (true), or from your account (false). Defaults to\nfalse\n"
@@ -2581,6 +2930,7 @@
                 }
             },
             "required": [
+                "application",
                 "enabledEvents",
                 "secret",
                 "url"
@@ -2634,6 +2984,10 @@
                         "type": "string",
                         "description": "Events sent to this endpoint will be generated with this Stripe Version instead of your account’s default Stripe\nVersion.\n",
                         "willReplaceOnChanges": true
+                    },
+                    "application": {
+                        "type": "string",
+                        "description": "The ID of the associated Connect application.\n"
                     },
                     "connect": {
                         "type": "boolean",

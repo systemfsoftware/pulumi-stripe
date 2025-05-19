@@ -13,32 +13,31 @@ namespace Pulumi.Stripe.Inputs
     public sealed class FileLinkArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// String. Time at which the object was created. Measured in seconds since the Unix epoch.
+        /// Time at which the object was created. Measured in seconds since the Unix epoch.
         /// </summary>
         [Input("created")]
         public Input<int>? Created { get; set; }
 
         /// <summary>
-        /// Bool. Returns if the link is already expired.
+        /// Returns if the link is already expired.
         /// </summary>
         [Input("expired")]
         public Input<bool>? Expired { get; set; }
 
         /// <summary>
-        /// Int. Time that the link expires.
+        /// Time that the link expires
         /// </summary>
         [Input("expiresAt")]
         public Input<int>? ExpiresAt { get; set; }
 
         /// <summary>
-        /// String. Unique identifier for the object.
+        /// Unique identifier for the object.
         /// </summary>
         [Input("id")]
         public Input<string>? Id { get; set; }
 
         /// <summary>
-        /// Bool. Has the value `true` if the object exists in live mode or the value `false` 
-        /// if the object exists in test mode.
+        /// Has the value true if the object exists in live mode or the value false if the object exists in test mode.
         /// </summary>
         [Input("livemode")]
         public Input<bool>? Livemode { get; set; }
@@ -47,7 +46,7 @@ namespace Pulumi.Stripe.Inputs
         private InputMap<string>? _metadata;
 
         /// <summary>
-        /// Map(String). Set of key-value pairs that you can attach to an object.
+        /// Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
         /// </summary>
         public InputMap<string> Metadata
         {
@@ -56,13 +55,13 @@ namespace Pulumi.Stripe.Inputs
         }
 
         /// <summary>
-        /// String. String representing the object’s type. Objects of the same type share the same value.
+        /// String representing the object’s type. Objects of the same type share the same value.
         /// </summary>
         [Input("object")]
         public Input<string>? Object { get; set; }
 
         /// <summary>
-        /// String. The publicly accessible URL to download the file.
+        /// The publicly accessible URL to download the file.
         /// </summary>
         [Input("url")]
         public Input<string>? Url { get; set; }

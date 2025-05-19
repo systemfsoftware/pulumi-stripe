@@ -20,7 +20,7 @@ import (
 	// Allow embedding bridge-metadata.json in the provider.
 	_ "embed"
 
-	stripe "github.com/lukasaron/terraform-provider-stripe/stripe" // Import the upstream provider
+	stripe "github.com/lukasaron/terraform-provider-stripe/stripe"
 
 	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge"
 	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge/tokens"

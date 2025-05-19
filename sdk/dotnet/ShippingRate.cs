@@ -9,56 +9,39 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Stripe
 {
-    /// <summary>
-    /// With this resource, you can create a shipping rate - [Stripe API shipping rate documentation](https://stripe.com/docs/api/shipping_rates).
-    /// 
-    /// Shipping rates let you display various shipping options—like standard, express, and overnight—with more accurate delivery estimates.
-    /// Charge your customer for shipping using different Stripe products, some of which require coding.
-    /// 
-    /// &gt; Removal of the shipping rate isn't supported through the Stripe SDK. The best practice, which this provider follows,
-    /// is to archive the shipping rate by marking it as inactive on destroy, which indicates that the shipping rate is no longer
-    /// available.
-    /// </summary>
     [StripeResourceType("stripe:index/shippingRate:ShippingRate")]
     public partial class ShippingRate : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// Bool. Whether the shipping rate is active (can't be used when creating). Defaults to `true`.
+        /// Whether the shipping rate can be used for new purchases. Defaults to true.
         /// </summary>
         [Output("active")]
         public Output<bool?> Active { get; private set; } = null!;
 
-        /// <summary>
-        /// List(Resource). The estimated range for how long shipping will take, 
-        /// meant to be displayable to the customer. This will appear on CheckoutSessions.
-        /// For details please see Delivery Estimate.
-        /// </summary>
         [Output("deliveryEstimates")]
         public Output<ImmutableArray<Outputs.ShippingRateDeliveryEstimate>> DeliveryEstimates { get; private set; } = null!;
 
         /// <summary>
-        /// String. The name of the shipping rate, meant to be displayable to the customer. 
-        /// This will appear on CheckoutSessions.
+        /// The name of the shipping rate, meant to be displayable to the customer. This will appear on CheckoutSessions.
         /// </summary>
         [Output("displayName")]
         public Output<string> DisplayName { get; private set; } = null!;
 
         /// <summary>
-        /// List(Resource). Describes a fixed amount to charge for shipping. 
-        /// Must be present if type is `fixed_amount`. For details of individual arguments see Fixed Amount.
+        /// Describes a fixed amount to charge for shipping. Must be present for now.
         /// </summary>
         [Output("fixedAmount")]
         public Output<Outputs.ShippingRateFixedAmount> FixedAmount { get; private set; } = null!;
 
         /// <summary>
-        /// Bool. Has the value true if the object exists in live mode or the value false if the object exists in test mode.
+        /// Has the value true if the object exists in live mode or the value false if the object exists in test mode.
         /// </summary>
         [Output("livemode")]
         public Output<bool> Livemode { get; private set; } = null!;
 
         /// <summary>
-        /// Map(String). Set of key-value pairs that you can attach to an object. This can be useful for
-        /// storing additional information about the object in a structured format.
+        /// Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the
+        /// object in a structured format.
         /// </summary>
         [Output("metadata")]
         public Output<ImmutableDictionary<string, string>?> Metadata { get; private set; } = null!;
@@ -71,13 +54,13 @@ namespace Pulumi.Stripe
         public Output<string?> TaxBehavior { get; private set; } = null!;
 
         /// <summary>
-        /// String. A tax code ID. The Shipping tax code is `txcd_92010001`.
+        /// A tax code ID. The Shipping tax code is txcd_92010001.
         /// </summary>
         [Output("taxCode")]
         public Output<string?> TaxCode { get; private set; } = null!;
 
         /// <summary>
-        /// String. The type of calculation to use on the shipping rate. Can only be `fixed_amount` for now.
+        /// The type of calculation to use on the shipping rate. Can only be fixed_amount for now
         /// </summary>
         [Output("type")]
         public Output<string?> Type { get; private set; } = null!;
@@ -129,19 +112,13 @@ namespace Pulumi.Stripe
     public sealed class ShippingRateArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Bool. Whether the shipping rate is active (can't be used when creating). Defaults to `true`.
+        /// Whether the shipping rate can be used for new purchases. Defaults to true.
         /// </summary>
         [Input("active")]
         public Input<bool>? Active { get; set; }
 
         [Input("deliveryEstimates")]
         private InputList<Inputs.ShippingRateDeliveryEstimateArgs>? _deliveryEstimates;
-
-        /// <summary>
-        /// List(Resource). The estimated range for how long shipping will take, 
-        /// meant to be displayable to the customer. This will appear on CheckoutSessions.
-        /// For details please see Delivery Estimate.
-        /// </summary>
         public InputList<Inputs.ShippingRateDeliveryEstimateArgs> DeliveryEstimates
         {
             get => _deliveryEstimates ?? (_deliveryEstimates = new InputList<Inputs.ShippingRateDeliveryEstimateArgs>());
@@ -149,15 +126,13 @@ namespace Pulumi.Stripe
         }
 
         /// <summary>
-        /// String. The name of the shipping rate, meant to be displayable to the customer. 
-        /// This will appear on CheckoutSessions.
+        /// The name of the shipping rate, meant to be displayable to the customer. This will appear on CheckoutSessions.
         /// </summary>
         [Input("displayName", required: true)]
         public Input<string> DisplayName { get; set; } = null!;
 
         /// <summary>
-        /// List(Resource). Describes a fixed amount to charge for shipping. 
-        /// Must be present if type is `fixed_amount`. For details of individual arguments see Fixed Amount.
+        /// Describes a fixed amount to charge for shipping. Must be present for now.
         /// </summary>
         [Input("fixedAmount", required: true)]
         public Input<Inputs.ShippingRateFixedAmountArgs> FixedAmount { get; set; } = null!;
@@ -166,8 +141,8 @@ namespace Pulumi.Stripe
         private InputMap<string>? _metadata;
 
         /// <summary>
-        /// Map(String). Set of key-value pairs that you can attach to an object. This can be useful for
-        /// storing additional information about the object in a structured format.
+        /// Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the
+        /// object in a structured format.
         /// </summary>
         public InputMap<string> Metadata
         {
@@ -183,13 +158,13 @@ namespace Pulumi.Stripe
         public Input<string>? TaxBehavior { get; set; }
 
         /// <summary>
-        /// String. A tax code ID. The Shipping tax code is `txcd_92010001`.
+        /// A tax code ID. The Shipping tax code is txcd_92010001.
         /// </summary>
         [Input("taxCode")]
         public Input<string>? TaxCode { get; set; }
 
         /// <summary>
-        /// String. The type of calculation to use on the shipping rate. Can only be `fixed_amount` for now.
+        /// The type of calculation to use on the shipping rate. Can only be fixed_amount for now
         /// </summary>
         [Input("type")]
         public Input<string>? Type { get; set; }
@@ -203,19 +178,13 @@ namespace Pulumi.Stripe
     public sealed class ShippingRateState : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Bool. Whether the shipping rate is active (can't be used when creating). Defaults to `true`.
+        /// Whether the shipping rate can be used for new purchases. Defaults to true.
         /// </summary>
         [Input("active")]
         public Input<bool>? Active { get; set; }
 
         [Input("deliveryEstimates")]
         private InputList<Inputs.ShippingRateDeliveryEstimateGetArgs>? _deliveryEstimates;
-
-        /// <summary>
-        /// List(Resource). The estimated range for how long shipping will take, 
-        /// meant to be displayable to the customer. This will appear on CheckoutSessions.
-        /// For details please see Delivery Estimate.
-        /// </summary>
         public InputList<Inputs.ShippingRateDeliveryEstimateGetArgs> DeliveryEstimates
         {
             get => _deliveryEstimates ?? (_deliveryEstimates = new InputList<Inputs.ShippingRateDeliveryEstimateGetArgs>());
@@ -223,21 +192,19 @@ namespace Pulumi.Stripe
         }
 
         /// <summary>
-        /// String. The name of the shipping rate, meant to be displayable to the customer. 
-        /// This will appear on CheckoutSessions.
+        /// The name of the shipping rate, meant to be displayable to the customer. This will appear on CheckoutSessions.
         /// </summary>
         [Input("displayName")]
         public Input<string>? DisplayName { get; set; }
 
         /// <summary>
-        /// List(Resource). Describes a fixed amount to charge for shipping. 
-        /// Must be present if type is `fixed_amount`. For details of individual arguments see Fixed Amount.
+        /// Describes a fixed amount to charge for shipping. Must be present for now.
         /// </summary>
         [Input("fixedAmount")]
         public Input<Inputs.ShippingRateFixedAmountGetArgs>? FixedAmount { get; set; }
 
         /// <summary>
-        /// Bool. Has the value true if the object exists in live mode or the value false if the object exists in test mode.
+        /// Has the value true if the object exists in live mode or the value false if the object exists in test mode.
         /// </summary>
         [Input("livemode")]
         public Input<bool>? Livemode { get; set; }
@@ -246,8 +213,8 @@ namespace Pulumi.Stripe
         private InputMap<string>? _metadata;
 
         /// <summary>
-        /// Map(String). Set of key-value pairs that you can attach to an object. This can be useful for
-        /// storing additional information about the object in a structured format.
+        /// Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the
+        /// object in a structured format.
         /// </summary>
         public InputMap<string> Metadata
         {
@@ -263,13 +230,13 @@ namespace Pulumi.Stripe
         public Input<string>? TaxBehavior { get; set; }
 
         /// <summary>
-        /// String. A tax code ID. The Shipping tax code is `txcd_92010001`.
+        /// A tax code ID. The Shipping tax code is txcd_92010001.
         /// </summary>
         [Input("taxCode")]
         public Input<string>? TaxCode { get; set; }
 
         /// <summary>
-        /// String. The type of calculation to use on the shipping rate. Can only be `fixed_amount` for now.
+        /// The type of calculation to use on the shipping rate. Can only be fixed_amount for now
         /// </summary>
         [Input("type")]
         public Input<string>? Type { get; set; }

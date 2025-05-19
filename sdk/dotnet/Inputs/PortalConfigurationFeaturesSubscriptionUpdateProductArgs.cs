@@ -16,7 +16,7 @@ namespace Pulumi.Stripe.Inputs
         private InputList<string>? _prices;
 
         /// <summary>
-        /// List(String). The list of price IDs for the product that a subscription can be updated to.
+        /// The list of price IDs for the product that a subscription can be updated to.
         /// </summary>
         public InputList<string> Prices
         {
@@ -25,7 +25,7 @@ namespace Pulumi.Stripe.Inputs
         }
 
         /// <summary>
-        /// String. The product id.
+        /// The product id.
         /// </summary>
         [Input("product", required: true)]
         public Input<string> Product { get; set; } = null!;

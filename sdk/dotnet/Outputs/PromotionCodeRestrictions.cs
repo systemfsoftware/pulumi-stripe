@@ -14,25 +14,25 @@ namespace Pulumi.Stripe.Outputs
     public sealed class PromotionCodeRestrictions
     {
         /// <summary>
-        /// Bool. A Boolean indicating if the Promotion Code should only be redeemed for Customers without any successful payments or invoices.
+        /// A Boolean indicating if the Promotion Code should only be redeemed for Customers without any successful payments or invoices
         /// </summary>
         public readonly bool FirstTimeTransaction;
         /// <summary>
-        /// Int. Minimum amount required to redeem this Promotion Code into a Coupon (e.g., a purchase must be $100 or more to work).
+        /// Minimum amount required to redeem this Promotion Code into a Coupon (e.g., a purchase must be $100 or more to work).
         /// </summary>
-        public readonly int MinimumAmount;
+        public readonly int? MinimumAmount;
         /// <summary>
-        /// String. Three-letter ISO code for `minimum_amount`.
+        /// Three-letter ISO code for minimum_amount
         /// </summary>
-        public readonly string MinimumAmountCurrency;
+        public readonly string? MinimumAmountCurrency;
 
         [OutputConstructor]
         private PromotionCodeRestrictions(
             bool firstTimeTransaction,
 
-            int minimumAmount,
+            int? minimumAmount,
 
-            string minimumAmountCurrency)
+            string? minimumAmountCurrency)
         {
             FirstTimeTransaction = firstTimeTransaction;
             MinimumAmount = minimumAmount;

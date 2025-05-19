@@ -14,27 +14,23 @@ namespace Pulumi.Stripe.Outputs
     public sealed class PortalConfigurationFeatures
     {
         /// <summary>
-        /// List(Resource). Information about updating the customer details in the portal. See Customer Update.
+        /// Information about updating the customer details in the portal.
         /// </summary>
         public readonly Outputs.PortalConfigurationFeaturesCustomerUpdate? CustomerUpdate;
         /// <summary>
-        /// List(Resource). Information about showing the billing history in the portal. See Invoice History.
+        /// Information about showing the billing history in the portal.
         /// </summary>
         public readonly Outputs.PortalConfigurationFeaturesInvoiceHistory? InvoiceHistory;
         /// <summary>
-        /// List(Resource). Information about updating payment methods in the portal. See Payment Method Update.
+        /// Information about updating payment methods in the portal.
         /// </summary>
         public readonly Outputs.PortalConfigurationFeaturesPaymentMethodUpdate? PaymentMethodUpdate;
         /// <summary>
-        /// List(Resource). Information about canceling subscriptions in the portal. See Subscription Cancel.
+        /// Information about canceling subscriptions in the portal.
         /// </summary>
         public readonly Outputs.PortalConfigurationFeaturesSubscriptionCancel? SubscriptionCancel;
         /// <summary>
-        /// List(Resource). Information about pausing subscriptions in the portal. See Subscription Pause.
-        /// </summary>
-        public readonly ImmutableArray<Outputs.PortalConfigurationFeaturesSubscriptionPause> SubscriptionPauses;
-        /// <summary>
-        /// List(Resource). Information about updating subscriptions in the portal. See Subscription Update.
+        /// Information about updating subscriptions in the portal.
         /// </summary>
         public readonly ImmutableArray<Outputs.PortalConfigurationFeaturesSubscriptionUpdate> SubscriptionUpdates;
 
@@ -48,15 +44,12 @@ namespace Pulumi.Stripe.Outputs
 
             Outputs.PortalConfigurationFeaturesSubscriptionCancel? subscriptionCancel,
 
-            ImmutableArray<Outputs.PortalConfigurationFeaturesSubscriptionPause> subscriptionPauses,
-
             ImmutableArray<Outputs.PortalConfigurationFeaturesSubscriptionUpdate> subscriptionUpdates)
         {
             CustomerUpdate = customerUpdate;
             InvoiceHistory = invoiceHistory;
             PaymentMethodUpdate = paymentMethodUpdate;
             SubscriptionCancel = subscriptionCancel;
-            SubscriptionPauses = subscriptionPauses;
             SubscriptionUpdates = subscriptionUpdates;
         }
     }

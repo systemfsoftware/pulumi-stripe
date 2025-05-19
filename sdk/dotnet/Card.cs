@@ -9,129 +9,121 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Stripe
 {
-    /// <summary>
-    /// ## Example Usage
-    /// </summary>
     [StripeResourceType("stripe:index/card:Card")]
     public partial class Card : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// Map(String). Address map with fields related to the address: `line1`, `line2`, `city`, `state`
-        /// , `zip` and `country`.
+        /// Address map with fields related to the address: line1, line2, city, state, zip and country
         /// </summary>
         [Output("address")]
         public Output<ImmutableDictionary<string, string>?> Address { get; private set; } = null!;
 
         /// <summary>
-        /// String. If address `line1` was provided, results of the check: `pass`, `fail`, `unavailable`,
-        /// or `unchecked`.
+        /// If address_line1 was provided, results of the check: pass, fail, unavailable, or unchecked.
         /// </summary>
         [Output("addressLine1Check")]
         public Output<string> AddressLine1Check { get; private set; } = null!;
 
         /// <summary>
-        /// String. If address `zip` was provided, results of the check: `pass`, `fail`, `unavailable`,
-        /// or `unchecked`.
+        /// If address_zip was provided, results of the check: pass, fail, unavailable, or unchecked.
         /// </summary>
         [Output("addressZipCheck")]
         public Output<string> AddressZipCheck { get; private set; } = null!;
 
         /// <summary>
-        /// List(String). A set of available payout methods for this card. Only values from this set
-        /// should be passed as the method when creating a payout.
+        /// A set of available payout methods for this card. Only values from this set should be passed as the method when creating
+        /// a payout.
         /// </summary>
         [Output("availablePayoutMethods")]
         public Output<ImmutableArray<string>> AvailablePayoutMethods { get; private set; } = null!;
 
         /// <summary>
-        /// String. Card brand. Can be `American Express`, `Diners Club`, `Discover`, `JCB`, `MasterCard`, `UnionPay`
-        /// , `Visa`, or `Unknown`.
+        /// Card brand. Can be American Express, Diners Club, Discover, JCB, MasterCard, UnionPay, Visa, or Unknown.
         /// </summary>
         [Output("brand")]
         public Output<string> Brand { get; private set; } = null!;
 
         /// <summary>
-        /// String. Two-letter ISO code representing the country of the card. You could use this attribute to get a
-        /// sense of the international breakdown of cards you’ve collected.
+        /// Two-letter ISO code representing the country of the card. You could use this attribute to get a sense of the
+        /// international breakdown of cards you’ve collected.
         /// </summary>
         [Output("country")]
         public Output<string> Country { get; private set; } = null!;
 
         /// <summary>
-        /// String. The customer that this card belongs to.
+        /// The customer that this card belongs to.
         /// </summary>
         [Output("customer")]
         public Output<string> Customer { get; private set; } = null!;
 
         /// <summary>
-        /// Int. Card security code. Highly recommended to always include this value, but it's required only
-        /// for accounts based in European countries.
+        /// Card security code. Highly recommended to always include this value, but it's required only for accounts based in
+        /// European countries.
         /// </summary>
         [Output("cvc")]
         public Output<int?> Cvc { get; private set; } = null!;
 
         /// <summary>
-        /// String. If a `cvc` was provided, results of the check: `pass`, `fail`, `unavailable`, or `unchecked`. A
-        /// result of `unchecked` indicates that CVC was provided but hasn’t been checked yet
+        /// If a CVC was provided, results of the check: pass, fail, unavailable, or unchecked. A result of unchecked indicates that
+        /// CVC was provided but hasn’t been checked yet.
         /// </summary>
         [Output("cvcCheck")]
         public Output<string> CvcCheck { get; private set; } = null!;
 
         /// <summary>
-        /// Int. Number representing the card's expiration month.
+        /// Two-digit number representing the card's expiration month.
         /// </summary>
         [Output("expMonth")]
         public Output<int> ExpMonth { get; private set; } = null!;
 
         /// <summary>
-        /// Int. Four-digit number representing the card's expiration year.
+        /// Four-digit number representing the card's expiration year.
         /// </summary>
         [Output("expYear")]
         public Output<int> ExpYear { get; private set; } = null!;
 
         /// <summary>
-        /// String. Uniquely identifies this particular card number. You can use this attribute to check whether
-        /// two customers who’ve signed up with you are using the same card number, for example. For payment methods that tokenize
-        /// card information (Apple Pay, Google Pay), the tokenized number might be provided instead of the underlying card
-        /// number.
+        /// Uniquely identifies this particular card number. You can use this attribute to check whether two customers who’ve
+        /// signed up with you are using the same card number, for example. For payment methods that tokenize card information
+        /// (Apple Pay, Google Pay), the tokenized number might be provided instead of the underlying card number.
         /// </summary>
         [Output("fingerprint")]
         public Output<string> Fingerprint { get; private set; } = null!;
 
         /// <summary>
-        /// String. Card funding type. Can be `credit`, `debit`, `prepaid`, or `unknown`.
+        /// Card funding type. Can be credit, debit, prepaid, or unknown.
         /// </summary>
         [Output("funding")]
         public Output<string> Funding { get; private set; } = null!;
 
         /// <summary>
-        /// String. The last four digits of the card.
+        /// The last four digits of the card.
         /// </summary>
         [Output("last4")]
         public Output<string> Last4 { get; private set; } = null!;
 
         /// <summary>
-        /// Map(String). Set of key-value pairs that you can attach to an object. This can be useful for
-        /// storing additional information about the object in a structured format.
+        /// Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the
+        /// object in a structured format.
         /// </summary>
         [Output("metadata")]
         public Output<ImmutableDictionary<string, string>?> Metadata { get; private set; } = null!;
 
         /// <summary>
-        /// String. Cardholder name.
+        /// Cardholder name.
         /// </summary>
         [Output("name")]
         public Output<string> Name { get; private set; } = null!;
 
         /// <summary>
-        /// String. The card number, as a string without any separators.
+        /// The card number, as a string without any separators.
         /// </summary>
         [Output("number")]
         public Output<string> Number { get; private set; } = null!;
 
         /// <summary>
-        /// String. If the card number is tokenized, this is the method that was used. Can
-        /// be `android_pay` (includes Google Pay), `apple_pay`, `masterpass`, `visa_checkout`, or `null`.
+        /// If the card number is tokenized, this is the method that was used. Can be android_pay (includes Google Pay), apple_pay,
+        /// masterpass, visa_checkout, or null.
         /// </summary>
         [Output("tokenizationMethod")]
         public Output<string> TokenizationMethod { get; private set; } = null!;
@@ -191,8 +183,7 @@ namespace Pulumi.Stripe
         private InputMap<string>? _address;
 
         /// <summary>
-        /// Map(String). Address map with fields related to the address: `line1`, `line2`, `city`, `state`
-        /// , `zip` and `country`.
+        /// Address map with fields related to the address: line1, line2, city, state, zip and country
         /// </summary>
         public InputMap<string> Address
         {
@@ -201,7 +192,7 @@ namespace Pulumi.Stripe
         }
 
         /// <summary>
-        /// String. The customer that this card belongs to.
+        /// The customer that this card belongs to.
         /// </summary>
         [Input("customer", required: true)]
         public Input<string> Customer { get; set; } = null!;
@@ -210,8 +201,8 @@ namespace Pulumi.Stripe
         private Input<int>? _cvc;
 
         /// <summary>
-        /// Int. Card security code. Highly recommended to always include this value, but it's required only
-        /// for accounts based in European countries.
+        /// Card security code. Highly recommended to always include this value, but it's required only for accounts based in
+        /// European countries.
         /// </summary>
         public Input<int>? Cvc
         {
@@ -224,13 +215,13 @@ namespace Pulumi.Stripe
         }
 
         /// <summary>
-        /// Int. Number representing the card's expiration month.
+        /// Two-digit number representing the card's expiration month.
         /// </summary>
         [Input("expMonth", required: true)]
         public Input<int> ExpMonth { get; set; } = null!;
 
         /// <summary>
-        /// Int. Four-digit number representing the card's expiration year.
+        /// Four-digit number representing the card's expiration year.
         /// </summary>
         [Input("expYear", required: true)]
         public Input<int> ExpYear { get; set; } = null!;
@@ -239,8 +230,8 @@ namespace Pulumi.Stripe
         private InputMap<string>? _metadata;
 
         /// <summary>
-        /// Map(String). Set of key-value pairs that you can attach to an object. This can be useful for
-        /// storing additional information about the object in a structured format.
+        /// Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the
+        /// object in a structured format.
         /// </summary>
         public InputMap<string> Metadata
         {
@@ -249,7 +240,7 @@ namespace Pulumi.Stripe
         }
 
         /// <summary>
-        /// String. Cardholder name.
+        /// Cardholder name.
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
@@ -258,7 +249,7 @@ namespace Pulumi.Stripe
         private Input<string>? _number;
 
         /// <summary>
-        /// String. The card number, as a string without any separators.
+        /// The card number, as a string without any separators.
         /// </summary>
         public Input<string>? Number
         {
@@ -282,8 +273,7 @@ namespace Pulumi.Stripe
         private InputMap<string>? _address;
 
         /// <summary>
-        /// Map(String). Address map with fields related to the address: `line1`, `line2`, `city`, `state`
-        /// , `zip` and `country`.
+        /// Address map with fields related to the address: line1, line2, city, state, zip and country
         /// </summary>
         public InputMap<string> Address
         {
@@ -292,15 +282,13 @@ namespace Pulumi.Stripe
         }
 
         /// <summary>
-        /// String. If address `line1` was provided, results of the check: `pass`, `fail`, `unavailable`,
-        /// or `unchecked`.
+        /// If address_line1 was provided, results of the check: pass, fail, unavailable, or unchecked.
         /// </summary>
         [Input("addressLine1Check")]
         public Input<string>? AddressLine1Check { get; set; }
 
         /// <summary>
-        /// String. If address `zip` was provided, results of the check: `pass`, `fail`, `unavailable`,
-        /// or `unchecked`.
+        /// If address_zip was provided, results of the check: pass, fail, unavailable, or unchecked.
         /// </summary>
         [Input("addressZipCheck")]
         public Input<string>? AddressZipCheck { get; set; }
@@ -309,8 +297,8 @@ namespace Pulumi.Stripe
         private InputList<string>? _availablePayoutMethods;
 
         /// <summary>
-        /// List(String). A set of available payout methods for this card. Only values from this set
-        /// should be passed as the method when creating a payout.
+        /// A set of available payout methods for this card. Only values from this set should be passed as the method when creating
+        /// a payout.
         /// </summary>
         public InputList<string> AvailablePayoutMethods
         {
@@ -319,21 +307,20 @@ namespace Pulumi.Stripe
         }
 
         /// <summary>
-        /// String. Card brand. Can be `American Express`, `Diners Club`, `Discover`, `JCB`, `MasterCard`, `UnionPay`
-        /// , `Visa`, or `Unknown`.
+        /// Card brand. Can be American Express, Diners Club, Discover, JCB, MasterCard, UnionPay, Visa, or Unknown.
         /// </summary>
         [Input("brand")]
         public Input<string>? Brand { get; set; }
 
         /// <summary>
-        /// String. Two-letter ISO code representing the country of the card. You could use this attribute to get a
-        /// sense of the international breakdown of cards you’ve collected.
+        /// Two-letter ISO code representing the country of the card. You could use this attribute to get a sense of the
+        /// international breakdown of cards you’ve collected.
         /// </summary>
         [Input("country")]
         public Input<string>? Country { get; set; }
 
         /// <summary>
-        /// String. The customer that this card belongs to.
+        /// The customer that this card belongs to.
         /// </summary>
         [Input("customer")]
         public Input<string>? Customer { get; set; }
@@ -342,8 +329,8 @@ namespace Pulumi.Stripe
         private Input<int>? _cvc;
 
         /// <summary>
-        /// Int. Card security code. Highly recommended to always include this value, but it's required only
-        /// for accounts based in European countries.
+        /// Card security code. Highly recommended to always include this value, but it's required only for accounts based in
+        /// European countries.
         /// </summary>
         public Input<int>? Cvc
         {
@@ -356,41 +343,40 @@ namespace Pulumi.Stripe
         }
 
         /// <summary>
-        /// String. If a `cvc` was provided, results of the check: `pass`, `fail`, `unavailable`, or `unchecked`. A
-        /// result of `unchecked` indicates that CVC was provided but hasn’t been checked yet
+        /// If a CVC was provided, results of the check: pass, fail, unavailable, or unchecked. A result of unchecked indicates that
+        /// CVC was provided but hasn’t been checked yet.
         /// </summary>
         [Input("cvcCheck")]
         public Input<string>? CvcCheck { get; set; }
 
         /// <summary>
-        /// Int. Number representing the card's expiration month.
+        /// Two-digit number representing the card's expiration month.
         /// </summary>
         [Input("expMonth")]
         public Input<int>? ExpMonth { get; set; }
 
         /// <summary>
-        /// Int. Four-digit number representing the card's expiration year.
+        /// Four-digit number representing the card's expiration year.
         /// </summary>
         [Input("expYear")]
         public Input<int>? ExpYear { get; set; }
 
         /// <summary>
-        /// String. Uniquely identifies this particular card number. You can use this attribute to check whether
-        /// two customers who’ve signed up with you are using the same card number, for example. For payment methods that tokenize
-        /// card information (Apple Pay, Google Pay), the tokenized number might be provided instead of the underlying card
-        /// number.
+        /// Uniquely identifies this particular card number. You can use this attribute to check whether two customers who’ve
+        /// signed up with you are using the same card number, for example. For payment methods that tokenize card information
+        /// (Apple Pay, Google Pay), the tokenized number might be provided instead of the underlying card number.
         /// </summary>
         [Input("fingerprint")]
         public Input<string>? Fingerprint { get; set; }
 
         /// <summary>
-        /// String. Card funding type. Can be `credit`, `debit`, `prepaid`, or `unknown`.
+        /// Card funding type. Can be credit, debit, prepaid, or unknown.
         /// </summary>
         [Input("funding")]
         public Input<string>? Funding { get; set; }
 
         /// <summary>
-        /// String. The last four digits of the card.
+        /// The last four digits of the card.
         /// </summary>
         [Input("last4")]
         public Input<string>? Last4 { get; set; }
@@ -399,8 +385,8 @@ namespace Pulumi.Stripe
         private InputMap<string>? _metadata;
 
         /// <summary>
-        /// Map(String). Set of key-value pairs that you can attach to an object. This can be useful for
-        /// storing additional information about the object in a structured format.
+        /// Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the
+        /// object in a structured format.
         /// </summary>
         public InputMap<string> Metadata
         {
@@ -409,7 +395,7 @@ namespace Pulumi.Stripe
         }
 
         /// <summary>
-        /// String. Cardholder name.
+        /// Cardholder name.
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
@@ -418,7 +404,7 @@ namespace Pulumi.Stripe
         private Input<string>? _number;
 
         /// <summary>
-        /// String. The card number, as a string without any separators.
+        /// The card number, as a string without any separators.
         /// </summary>
         public Input<string>? Number
         {
@@ -431,8 +417,8 @@ namespace Pulumi.Stripe
         }
 
         /// <summary>
-        /// String. If the card number is tokenized, this is the method that was used. Can
-        /// be `android_pay` (includes Google Pay), `apple_pay`, `masterpass`, `visa_checkout`, or `null`.
+        /// If the card number is tokenized, this is the method that was used. Can be android_pay (includes Google Pay), apple_pay,
+        /// masterpass, visa_checkout, or null.
         /// </summary>
         [Input("tokenizationMethod")]
         public Input<string>? TokenizationMethod { get; set; }

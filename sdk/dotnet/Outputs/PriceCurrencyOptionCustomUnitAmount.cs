@@ -14,20 +14,19 @@ namespace Pulumi.Stripe.Outputs
     public sealed class PriceCurrencyOptionCustomUnitAmount
     {
         /// <summary>
-        /// Bool. Pass in `true` to enable `custom_unit_amount`, otherwise omit `custom_unit_amount`.
+        /// Pass in true to enable custom_unit_amount, otherwise omit custom_unit_amount
         /// </summary>
         public readonly bool Enabled;
         /// <summary>
-        /// Int. The maximum unit amount the customer can specify for this item.
+        /// The maximum unit amount the customer can specify for this item.
         /// </summary>
         public readonly int? Maximum;
         /// <summary>
-        /// Int. The minimum unit amount the customer can specify for this item. 
-        /// Must be at least the minimum charge amount.
+        /// The minimum unit amount the customer can specify for this item. Must be at least the minimum charge amount.
         /// </summary>
         public readonly int? Minimum;
         /// <summary>
-        /// Int. The starting unit amount which can be updated by the customer.
+        /// The starting unit amount which can be updated by the customer.
         /// </summary>
         public readonly int? Preset;
 

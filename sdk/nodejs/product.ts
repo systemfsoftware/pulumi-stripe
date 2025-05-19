@@ -42,13 +42,13 @@ export class Product extends pulumi.CustomResource {
      */
     public readonly description!: pulumi.Output<string | undefined>;
     /**
-     * A list of up to 15 features for this product. These are displayed in pricing tables.
-     */
-    public readonly features!: pulumi.Output<string[] | undefined>;
-    /**
      * A list of up to 8 URLs of images for this product, meant to be displayable to the customer.
      */
     public readonly images!: pulumi.Output<string[] | undefined>;
+    /**
+     * A list of up to 15 marketing features for this product. These are displayed in pricing tables.
+     */
+    public readonly marketingFeatures!: pulumi.Output<string[] | undefined>;
     /**
      * Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the
      * object in a structured format.
@@ -107,8 +107,8 @@ export class Product extends pulumi.CustomResource {
             const state = argsOrState as ProductState | undefined;
             resourceInputs["active"] = state ? state.active : undefined;
             resourceInputs["description"] = state ? state.description : undefined;
-            resourceInputs["features"] = state ? state.features : undefined;
             resourceInputs["images"] = state ? state.images : undefined;
+            resourceInputs["marketingFeatures"] = state ? state.marketingFeatures : undefined;
             resourceInputs["metadata"] = state ? state.metadata : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
             resourceInputs["packageDimensions"] = state ? state.packageDimensions : undefined;
@@ -122,8 +122,8 @@ export class Product extends pulumi.CustomResource {
             const args = argsOrState as ProductArgs | undefined;
             resourceInputs["active"] = args ? args.active : undefined;
             resourceInputs["description"] = args ? args.description : undefined;
-            resourceInputs["features"] = args ? args.features : undefined;
             resourceInputs["images"] = args ? args.images : undefined;
+            resourceInputs["marketingFeatures"] = args ? args.marketingFeatures : undefined;
             resourceInputs["metadata"] = args ? args.metadata : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
             resourceInputs["packageDimensions"] = args ? args.packageDimensions : undefined;
@@ -153,13 +153,13 @@ export interface ProductState {
      */
     description?: pulumi.Input<string>;
     /**
-     * A list of up to 15 features for this product. These are displayed in pricing tables.
-     */
-    features?: pulumi.Input<pulumi.Input<string>[]>;
-    /**
      * A list of up to 8 URLs of images for this product, meant to be displayable to the customer.
      */
     images?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * A list of up to 15 marketing features for this product. These are displayed in pricing tables.
+     */
+    marketingFeatures?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the
      * object in a structured format.
@@ -218,13 +218,13 @@ export interface ProductArgs {
      */
     description?: pulumi.Input<string>;
     /**
-     * A list of up to 15 features for this product. These are displayed in pricing tables.
-     */
-    features?: pulumi.Input<pulumi.Input<string>[]>;
-    /**
      * A list of up to 8 URLs of images for this product, meant to be displayable to the customer.
      */
     images?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * A list of up to 15 marketing features for this product. These are displayed in pricing tables.
+     */
+    marketingFeatures?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the
      * object in a structured format.

@@ -9,60 +9,57 @@ using Pulumi.Serialization;
 
 namespace Pulumi.Stripe
 {
-    /// <summary>
-    /// With this resource, you can create a promotion code - [Stripe API promotion code documentation](https://stripe.com/docs/api/promotion_codes).
-    /// 
-    /// A Promotion Code represents a customer-redeemable code for a coupon. It can be used to create multiple codes for a single coupon.
-    /// 
-    /// &gt; Removal of the promotion code isn't supported through the Stripe SDK.
-    /// </summary>
     [StripeResourceType("stripe:index/promotionCode:PromotionCode")]
     public partial class PromotionCode : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// Bool. Whether the promotion code is currently active. Defaults to `true`.
+        /// Whether the promotion code is currently active.
         /// </summary>
         [Output("active")]
         public Output<bool?> Active { get; private set; } = null!;
 
         /// <summary>
-        /// String. The customer-facing code. Regardless of case, this code must be unique across all active promotion codes for a specific customer. If left blank, we will generate one automatically.
+        /// The customer-facing code. Regardless of case, this code must be unique across all active promotion codes for a specific
+        /// customer. If left blank, we will generate one automatically.
         /// </summary>
         [Output("code")]
         public Output<string?> Code { get; private set; } = null!;
 
         /// <summary>
-        /// String. The coupon for this promotion code.
+        /// The coupon for this promotion code.
         /// </summary>
         [Output("coupon")]
         public Output<string> Coupon { get; private set; } = null!;
 
         /// <summary>
-        /// String. The customer that this promotion code can be used by. If not set, the promotion code can be used by all customers.
+        /// The customer that this promotion code can be used by. If not set, the promotion code can be used by all customers.
         /// </summary>
         [Output("customer")]
         public Output<string?> Customer { get; private set; } = null!;
 
         /// <summary>
-        /// String. The timestamp at which this promotion code will expire. If the coupon has specified a `redeems_by`, then this value cannot be after the coupon’s `redeems_by`. Expected format is `RFC3339`.
+        /// The timestamp at which this promotion code will expire. If the coupon has specified a redeems_by, then this value cannot
+        /// be after the coupon’s redeems_by. Expected format is RFC3339
         /// </summary>
         [Output("expiresAt")]
         public Output<string?> ExpiresAt { get; private set; } = null!;
 
         /// <summary>
-        /// Int. A positive integer specifying the number of times the promotion code can be redeemed. If the coupon has specified a `max_redemptions`, then this value cannot be greater than the coupon’s `max_redemptions`.
+        /// A positive integer specifying the number of times the promotion code can be redeemed. If the coupon has specified a
+        /// max_redemptions, then this value cannot be greater than the coupon’s max_redemptions.
         /// </summary>
         [Output("maxRedemptions")]
         public Output<int?> MaxRedemptions { get; private set; } = null!;
 
         /// <summary>
-        /// Map(String). Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
+        /// Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the
+        /// object in a structured format.
         /// </summary>
         [Output("metadata")]
         public Output<ImmutableDictionary<string, string>?> Metadata { get; private set; } = null!;
 
         /// <summary>
-        /// List(Resource). Settings that restrict the redemption of the promotion code. For details of individual arguments see Restrictions.
+        /// Settings that restrict the redemption of the promotion code.
         /// </summary>
         [Output("restrictions")]
         public Output<Outputs.PromotionCodeRestrictions?> Restrictions { get; private set; } = null!;
@@ -114,37 +111,40 @@ namespace Pulumi.Stripe
     public sealed class PromotionCodeArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Bool. Whether the promotion code is currently active. Defaults to `true`.
+        /// Whether the promotion code is currently active.
         /// </summary>
         [Input("active")]
         public Input<bool>? Active { get; set; }
 
         /// <summary>
-        /// String. The customer-facing code. Regardless of case, this code must be unique across all active promotion codes for a specific customer. If left blank, we will generate one automatically.
+        /// The customer-facing code. Regardless of case, this code must be unique across all active promotion codes for a specific
+        /// customer. If left blank, we will generate one automatically.
         /// </summary>
         [Input("code")]
         public Input<string>? Code { get; set; }
 
         /// <summary>
-        /// String. The coupon for this promotion code.
+        /// The coupon for this promotion code.
         /// </summary>
         [Input("coupon", required: true)]
         public Input<string> Coupon { get; set; } = null!;
 
         /// <summary>
-        /// String. The customer that this promotion code can be used by. If not set, the promotion code can be used by all customers.
+        /// The customer that this promotion code can be used by. If not set, the promotion code can be used by all customers.
         /// </summary>
         [Input("customer")]
         public Input<string>? Customer { get; set; }
 
         /// <summary>
-        /// String. The timestamp at which this promotion code will expire. If the coupon has specified a `redeems_by`, then this value cannot be after the coupon’s `redeems_by`. Expected format is `RFC3339`.
+        /// The timestamp at which this promotion code will expire. If the coupon has specified a redeems_by, then this value cannot
+        /// be after the coupon’s redeems_by. Expected format is RFC3339
         /// </summary>
         [Input("expiresAt")]
         public Input<string>? ExpiresAt { get; set; }
 
         /// <summary>
-        /// Int. A positive integer specifying the number of times the promotion code can be redeemed. If the coupon has specified a `max_redemptions`, then this value cannot be greater than the coupon’s `max_redemptions`.
+        /// A positive integer specifying the number of times the promotion code can be redeemed. If the coupon has specified a
+        /// max_redemptions, then this value cannot be greater than the coupon’s max_redemptions.
         /// </summary>
         [Input("maxRedemptions")]
         public Input<int>? MaxRedemptions { get; set; }
@@ -153,7 +153,8 @@ namespace Pulumi.Stripe
         private InputMap<string>? _metadata;
 
         /// <summary>
-        /// Map(String). Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
+        /// Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the
+        /// object in a structured format.
         /// </summary>
         public InputMap<string> Metadata
         {
@@ -162,7 +163,7 @@ namespace Pulumi.Stripe
         }
 
         /// <summary>
-        /// List(Resource). Settings that restrict the redemption of the promotion code. For details of individual arguments see Restrictions.
+        /// Settings that restrict the redemption of the promotion code.
         /// </summary>
         [Input("restrictions")]
         public Input<Inputs.PromotionCodeRestrictionsArgs>? Restrictions { get; set; }
@@ -176,37 +177,40 @@ namespace Pulumi.Stripe
     public sealed class PromotionCodeState : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Bool. Whether the promotion code is currently active. Defaults to `true`.
+        /// Whether the promotion code is currently active.
         /// </summary>
         [Input("active")]
         public Input<bool>? Active { get; set; }
 
         /// <summary>
-        /// String. The customer-facing code. Regardless of case, this code must be unique across all active promotion codes for a specific customer. If left blank, we will generate one automatically.
+        /// The customer-facing code. Regardless of case, this code must be unique across all active promotion codes for a specific
+        /// customer. If left blank, we will generate one automatically.
         /// </summary>
         [Input("code")]
         public Input<string>? Code { get; set; }
 
         /// <summary>
-        /// String. The coupon for this promotion code.
+        /// The coupon for this promotion code.
         /// </summary>
         [Input("coupon")]
         public Input<string>? Coupon { get; set; }
 
         /// <summary>
-        /// String. The customer that this promotion code can be used by. If not set, the promotion code can be used by all customers.
+        /// The customer that this promotion code can be used by. If not set, the promotion code can be used by all customers.
         /// </summary>
         [Input("customer")]
         public Input<string>? Customer { get; set; }
 
         /// <summary>
-        /// String. The timestamp at which this promotion code will expire. If the coupon has specified a `redeems_by`, then this value cannot be after the coupon’s `redeems_by`. Expected format is `RFC3339`.
+        /// The timestamp at which this promotion code will expire. If the coupon has specified a redeems_by, then this value cannot
+        /// be after the coupon’s redeems_by. Expected format is RFC3339
         /// </summary>
         [Input("expiresAt")]
         public Input<string>? ExpiresAt { get; set; }
 
         /// <summary>
-        /// Int. A positive integer specifying the number of times the promotion code can be redeemed. If the coupon has specified a `max_redemptions`, then this value cannot be greater than the coupon’s `max_redemptions`.
+        /// A positive integer specifying the number of times the promotion code can be redeemed. If the coupon has specified a
+        /// max_redemptions, then this value cannot be greater than the coupon’s max_redemptions.
         /// </summary>
         [Input("maxRedemptions")]
         public Input<int>? MaxRedemptions { get; set; }
@@ -215,7 +219,8 @@ namespace Pulumi.Stripe
         private InputMap<string>? _metadata;
 
         /// <summary>
-        /// Map(String). Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
+        /// Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the
+        /// object in a structured format.
         /// </summary>
         public InputMap<string> Metadata
         {
@@ -224,7 +229,7 @@ namespace Pulumi.Stripe
         }
 
         /// <summary>
-        /// List(Resource). Settings that restrict the redemption of the promotion code. For details of individual arguments see Restrictions.
+        /// Settings that restrict the redemption of the promotion code.
         /// </summary>
         [Input("restrictions")]
         public Input<Inputs.PromotionCodeRestrictionsGetArgs>? Restrictions { get; set; }

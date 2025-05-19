@@ -13,46 +13,34 @@ namespace Pulumi.Stripe.Inputs
     public sealed class PortalConfigurationFeaturesArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// List(Resource). Information about updating the customer details in the portal. See Customer Update.
+        /// Information about updating the customer details in the portal.
         /// </summary>
         [Input("customerUpdate")]
         public Input<Inputs.PortalConfigurationFeaturesCustomerUpdateArgs>? CustomerUpdate { get; set; }
 
         /// <summary>
-        /// List(Resource). Information about showing the billing history in the portal. See Invoice History.
+        /// Information about showing the billing history in the portal.
         /// </summary>
         [Input("invoiceHistory")]
         public Input<Inputs.PortalConfigurationFeaturesInvoiceHistoryArgs>? InvoiceHistory { get; set; }
 
         /// <summary>
-        /// List(Resource). Information about updating payment methods in the portal. See Payment Method Update.
+        /// Information about updating payment methods in the portal.
         /// </summary>
         [Input("paymentMethodUpdate")]
         public Input<Inputs.PortalConfigurationFeaturesPaymentMethodUpdateArgs>? PaymentMethodUpdate { get; set; }
 
         /// <summary>
-        /// List(Resource). Information about canceling subscriptions in the portal. See Subscription Cancel.
+        /// Information about canceling subscriptions in the portal.
         /// </summary>
         [Input("subscriptionCancel")]
         public Input<Inputs.PortalConfigurationFeaturesSubscriptionCancelArgs>? SubscriptionCancel { get; set; }
-
-        [Input("subscriptionPauses")]
-        private InputList<Inputs.PortalConfigurationFeaturesSubscriptionPauseArgs>? _subscriptionPauses;
-
-        /// <summary>
-        /// List(Resource). Information about pausing subscriptions in the portal. See Subscription Pause.
-        /// </summary>
-        public InputList<Inputs.PortalConfigurationFeaturesSubscriptionPauseArgs> SubscriptionPauses
-        {
-            get => _subscriptionPauses ?? (_subscriptionPauses = new InputList<Inputs.PortalConfigurationFeaturesSubscriptionPauseArgs>());
-            set => _subscriptionPauses = value;
-        }
 
         [Input("subscriptionUpdates")]
         private InputList<Inputs.PortalConfigurationFeaturesSubscriptionUpdateArgs>? _subscriptionUpdates;
 
         /// <summary>
-        /// List(Resource). Information about updating subscriptions in the portal. See Subscription Update.
+        /// Information about updating subscriptions in the portal.
         /// </summary>
         public InputList<Inputs.PortalConfigurationFeaturesSubscriptionUpdateArgs> SubscriptionUpdates
         {
